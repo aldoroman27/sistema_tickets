@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 /*En este apartado estmoas importando los íconos de cada una de nuestras páginas*/
 import { Ticket } from 'phosphor-react';
 import { User } from 'phosphor-react';
+import { CheckCircle } from 'phosphor-react'
 /*Importamos el diseño de nuestra barra de navegación*/
 import "./navbar.css";
 
@@ -18,6 +19,9 @@ export const NavBar = () => {
             </Link>
             <Link to="/Tickets">
                 <Ticket size={32} />
+            </Link>
+            <Link to="/CheckTickets">
+                <CheckCircle size={32} />
             </Link>
         </div>
     </div>

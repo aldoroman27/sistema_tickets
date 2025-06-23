@@ -1,0 +1,61 @@
+.admin-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background-color: #f5f7fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.titulo-admin {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.botones-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btn {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+}
+
+.btn-consultar {
+  background-color: #2980b9;
+}
+
+.btn-liberar {
+  background-color: #27ae60;
+}
+
+.btn-eliminar {
+  background-color: #c0392b;
+}
+
+.btn-modificar {
+  background-color: #8e44ad;
+}
+
+.btn-buscar {
+  background-color: #e67e22;
+}
+
+.btn-resueltos {
+  background-color: #16a085;
+}
