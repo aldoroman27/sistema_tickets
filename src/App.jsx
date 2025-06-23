@@ -1,6 +1,9 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavBar } from './components/navbar.jsx';
+import { Login } from '../pages/Login/Login.jsx';
+import { Tickets } from '../pages/Reportes/Tickets.jsx';
+
 
 function App() {
   return (
@@ -8,6 +11,8 @@ function App() {
       <Router>
         <NavBar/>
         <Routes>
+          <Route path='/Login' element={<Login/>} />
+          <Route path='/Tickets' element={<Tickets/>}/>
         </Routes>
       </Router>
     </div>

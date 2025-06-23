@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Fjalla+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:wght@100..900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Bitter", serif;
+}
+.container-l {
+    max-width: 500px;
+    margin: 50px auto 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Lo centra */
+    background-color: rgb(25, 133, 205);
+    padding: 2rem;
+    border-radius: 2rem;
+    height: 400px;
+    width: 400px;
+    text-align: center;
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+    }
+    .subtitle {
+        gap: 0.5rem;
+        font-size: 2rem;
+        color: rgb(253, 244, 244);
+        padding: 0 0 1.5rem 0;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    input {
+        border: none;
+        outline: none;
+        padding: 0.8rem;
+        border-radius: 40px;
+        border-style: outset;
+        &::placeholder {
+            color: rgb(22, 19, 19);
+        }
+    }
+    a {
+        color: rgb(255, 255, 255);
+        font-size: 25rem;
+    }
+    button {
+        padding: 1rem;
+        border: none;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        color: rgb(27, 26, 26);
+        background-color: rgb(40, 244, 67);
+    }
+}
