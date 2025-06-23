@@ -1,0 +1,27 @@
+.navbar {
+    width: 100%;
+    height: 80px;
+    background-color: rgb(17, 163, 248);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+
+  .Logo h1{
+    color: white;
+    margin: 0;
+  }
+
+  .links {
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .links a {
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    font-size: 25px;
+  }
