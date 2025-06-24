@@ -1,8 +1,9 @@
 import './Tickets.css';
 import { useState, useEffect } from 'react';
-import { agregarTicket } from '../../src/context/ticketContext'; 
+import { agregarTicket, useTickets } from '../../src/context/ticketContext'; 
 export const Tickets = () => {
 
+  const { agregarTicket } = useTickets();
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
   const [ticketData, setTicketData] = useState({
     idEmpleado: '',
@@ -30,6 +31,7 @@ export const Tickets = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    agregarTicket(ticketData);
     console.log('Datos del ticket:', ticketData);
 
     // Mostrar mensaje de éxito
