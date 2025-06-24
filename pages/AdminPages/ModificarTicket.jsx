@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ModificarTicket = () => {
   return (
-    <div>Modificar Tickets</div>
+    <h1 className='modificarTicket-title'>Modificar Ticket</h1>
   )
 }
 

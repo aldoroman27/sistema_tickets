@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Resueltos = () => {
   return (
-    <div>Tickets Resueltos</div>
+    <h1 className='ticketsResueltos-title'>Tickets Resueltos</h1>
   )
 }
 

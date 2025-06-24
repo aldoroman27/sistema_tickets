@@ -1,6 +1,6 @@
 import './Tickets.css';
 import { useState, useEffect } from 'react';
-
+import { agregarTicket } from '../../src/context/ticketContext'; 
 export const Tickets = () => {
 
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
@@ -42,8 +42,8 @@ export const Tickets = () => {
         departamento: '',
         equipo: '',
         descripcion: '',
-        fecha: prev.fecha, // mantenemos la fecha actual
-        status: 'Pendiente'
+        fecha: prev.fecha, // mantenemos la fecha actual.
+        status: 'Pendiente' //Mantenemos el status de pendiente siempre.
   }));
 
   // Ocultar mensaje después de unos segundos (opcional)
@@ -55,7 +55,7 @@ export const Tickets = () => {
       <div>
         <h1>Generar Ticket</h1>
         <h2>Aviso importante</h2>
-        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes.</h3>
+        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes. Si el problema no se solucionó entonces levante el ticket.</h3>
         {mensajeExito && (
         <div className="mensaje-exito">
             {mensajeExito}

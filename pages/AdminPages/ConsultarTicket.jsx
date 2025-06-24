@@ -1,8 +1,8 @@
 import React from 'react'
-
+import './ConsultarTicket.css';
 export const ConsultarTicket = () => {
   return (
-    <div>Consultar Tickets</div>
+    <h1 className="consultarTicket-title">Consultar Ticket</h1>
   )
 }
 
