@@ -12,6 +12,7 @@ export const Tickets = () => {
     equipo: '',
     descripcion: '',
     fecha: '',
+    status: 'Pendiente'
   });
   //Mensaje de registro éxitoso de nuestro ticket
   const [mensajeExito, setMensajeExito] = useState('');
@@ -42,6 +43,7 @@ export const Tickets = () => {
         equipo: '',
         descripcion: '',
         fecha: prev.fecha, // mantenemos la fecha actual
+        status: 'Pendiente'
   }));
 
   // Ocultar mensaje después de unos segundos (opcional)
@@ -52,6 +54,8 @@ export const Tickets = () => {
     <div className="container">
       <div>
         <h1>Generar Ticket</h1>
+        <h2>Aviso importante</h2>
+        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes.</h3>
         {mensajeExito && (
         <div className="mensaje-exito">
             {mensajeExito}
@@ -117,7 +121,8 @@ export const Tickets = () => {
             <option value="Mouse">Mouse</option>
             <option value="Teclado">Teclado</option>
             <option value="Audífonos">Audífonos</option>
-            <option value="Licencias">Licencias</option>
+            <option value="Licencias">Licencias de Software</option>
+            <option value="Solicitar equipo de cómputo">Solicitar equipo de cómputo</option>
             <option value="Red">Red</option>
             <option value="Otro">Otro</option>
           </select>

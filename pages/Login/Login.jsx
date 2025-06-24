@@ -1,16 +1,19 @@
 
 import './Login.css';
+
 export const Login = () => {
   return (
-    <div className="container-l">
-      <h1 className="subtitle">Iniciar Sesión</h1>
-            
-            <form>
-                <input type="text" placeholder="ID de empleado" />
-                <input type="password" placeholder="Contraseña" />
-                <button className="btn-iniciar">Iniciar Sesion</button>
-            </form>
-        </div>
-  )
-}
+    <div className="login-wrapper">
+      <div className="login-container">
+        <h2 className="login-title">Panel de Inicio de Sesión</h2>
+        <form className="login-form">
+          <input type="text" placeholder="ID de empleado" />
+          <input type="password" placeholder="Contraseña" />
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 export default Login;

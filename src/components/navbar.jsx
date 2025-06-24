@@ -15,7 +15,7 @@ export const NavBar = () => {
         </div>
         <div className="links">
             <Link to="/Login">
-                <User size={32} />
+                <User size={32}/>
             </Link>
             <Link to="/Tickets">
                 <Ticket size={32} />
