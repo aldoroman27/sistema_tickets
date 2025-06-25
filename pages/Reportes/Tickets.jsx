@@ -1,12 +1,14 @@
 import './Tickets.css';
 import { useState, useEffect } from 'react';
-import { agregarTicket, useTickets } from '../../src/context/ticketContext'; 
+import { useTickets } from '../../src/context/ticketContext.jsx'; 
 export const Tickets = () => {
 
   const { agregarTicket } = useTickets();
+  const [idGenerado, setIdGenerado] = useState(null);
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
   const [ticketData, setTicketData] = useState({
-    idEmpleado: '',
+    idTicket: '',
+    //idEmpleado: '',
     nombreCompleto: '',
     correoElectronico: '',
     departamento: '',
@@ -31,11 +33,9 @@ export const Tickets = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    agregarTicket(ticketData);
+    const nuevo = agregarTicket(ticketData);//Recibimos el ticket con toda la info
+    setIdGenerado(nuevo.idTicket);//Mostramos la info del ticket además de Mostrar el ID del ticket para el usuario
     console.log('Datos del ticket:', ticketData);
-
-    // Mostrar mensaje de éxito
-    setMensajeExito('✅ Ticket enviado correctamente');
 
     // Limpiar los campos (excepto la fecha)
     setTicketData(prev => ({
@@ -56,12 +56,22 @@ export const Tickets = () => {
     <div className="container">
       <div>
         <h1>Generar Ticket</h1>
-        <h2>Aviso importante</h2>
-        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes. Si el problema no se solucionó entonces levante el ticket.</h3>
+        <h2 className='avisoImportante'>Aviso importante</h2>
+        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes. Si el problema persiste genere el ticket.</h3>
         {mensajeExito && (
         <div className="mensaje-exito">
             {mensajeExito}
         </div>
+        )}
+        {idGenerado && (
+          <div className="modal-exito">
+            <h2>✅ Ticket enviado correctamente</h2>
+            <p><strong>CONSERVE SU ID DE TICKET:</strong></p>
+            <div className="id-ticket">{idGenerado}</div>
+            <button className="btn-continuar" onClick={() => setIdGenerado(null)}>
+              Continuar
+            </button>
+          </div>
         )}
         <form onSubmit={handleSubmit}>
           <input

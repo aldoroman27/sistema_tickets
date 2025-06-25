@@ -1,7 +1,7 @@
 import { useTickets } from '../../src/context/ticketContext';
 import './ConsultarTicket.css';
 
-const Consultar = () => {
+export const ConsultarTicket = () => {
   const { tickets } = useTickets();
 
   // Solo los tickets pendientes
@@ -17,8 +17,9 @@ const Consultar = () => {
         <table className="tabla-tickets">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>ID Ticket</th>
               <th>Empleado</th>
+              <th>ID Empleado</th>
               <th>Departamento</th>
               <th>Equipo</th>
               <th>Descripción</th>
@@ -29,8 +30,9 @@ const Consultar = () => {
           <tbody>
             {ticketsPendientes.map(ticket => (
               <tr key={ticket.id}>
-                <td>{ticket.id}</td>
+                <td>{ticket.idTicket}</td>
                 <td>{ticket.nombreCompleto}</td>
+                <td>{ticket.id}</td>
                 <td>{ticket.departamento}</td>
                 <td>{ticket.equipo}</td>
                 <td>{ticket.descripcion}</td>
@@ -45,4 +47,4 @@ const Consultar = () => {
   );
 };
 
-export default Consultar;
+export default ConsultarTicket;

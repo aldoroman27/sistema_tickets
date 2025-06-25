@@ -1,0 +1,39 @@
+.modificar-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.buscador {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mensaje {
+  color: #2d3436;
+  margin-bottom: 10px;
+}
+
+.formulario-modificacion input,
+.formulario-modificacion select,
+.formulario-modificacion textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn-guardar {
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-guardar:hover {
+  background-color: #74b9ff;
+}

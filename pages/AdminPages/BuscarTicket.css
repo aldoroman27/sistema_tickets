@@ -1,0 +1,29 @@
+.buscar-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.buscador {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mensaje {
+  color: #d63031;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ticket-info {
+  background-color: #dfe6e9;
+  border: 1px solid #b2bec3;
+  border-radius: 10px;
+  padding: 15px;
+  line-height: 1.6;
+}
+
+.ticket-info p {
+  margin: 5px 0;
+}

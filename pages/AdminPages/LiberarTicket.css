@@ -1,0 +1,66 @@
+.liberar-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #2f3542;
+  margin-bottom: 24px;
+}
+
+.buscador {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buscador input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+}
+
+.buscador button {
+  padding: 10px 16px;
+  background-color: #2980b9;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ticket-info {
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.ticket-info p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.btn-liberar {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mensaje {
+  margin-top: 10px;
+  color: #e67e22;
+  font-weight: bold;
+}

@@ -1,12 +1,11 @@
 .navbar {
     width: 100%;
     height: 80px;
-    background-color: rgb(17, 163, 248);
+    background-color: rgb(172, 221, 250);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
 
   .Logo h1{
     color: white;
@@ -21,7 +20,7 @@
   
   .links a {
     text-decoration: none;
-    color: white;
+    color: rgb(9, 63, 135);
     margin-left: 20px;
     font-size: 25px;
   }
