@@ -1,15 +1,16 @@
 from flask import Blueprint, request, jsonify
 from db import get_connection
 
+#Bluepr
 ticket_bp = Blueprint('tickets',__name__)
-@ticket_bp.route('/tickets', methods=['POST'])
 
+@ticket_bp.route('/tickets', methods=['POST'])
 #Definimos nustra función para crear tickets
 def crear_ticket():
     #Intentamos hacer la conexión con la base de datos
     try:
         conn = get_connection() #Hacemos conexión a la base de datos
-        cursor = conn.cursor()
+        cursor = conn.cursor()#Esta variable lo que hará es almacenar cada columna como un diccionario, las llaves de cada objeto dentro son los nombres de las columnas de MYSQL
         data = request.json
 
         #Añadimos la información haciendo uso de un qery de información SQL
@@ -33,13 +34,18 @@ def crear_ticket():
 
         #Ejecuta el envió de información con la instrucción qery y además los valores concatenados
         cursor.execute(sql, values)
+        #Guardamos el útlimo id generado
+        nuevo_id = cursor.lastrowid
         #Hacemos el commit a la base de datos
         conn.commit()
         #Terminamos la conexión con la base de datos
         conn.close()
 
         #Mostramos un mensaje en formato JSON que dirá que el mensaje fue insertado correctamente junto con el valor 201 (éxito)
-        return jsonify({'message': '✅ Ticket insertado correctamente'}),201
+        return jsonify({
+                        'message': '✅ Ticket insertado correctamente',
+                        'idTicket': nuevo_id
+                        }),201
     except Exception as e: #En caso de fallar mandamos una exception con la información del error
         return jsonify({'error':str(e)}),500 #Mostramos el código 500 que significa error en el servidor.
 
@@ -142,39 +148,44 @@ def modificarTicket(idTicket):
             return jsonify({'message':"Ticket no encontrado"}),404
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+#Esta función nos ayudará a mostrar los tickets que tenemos pendientes, usando el método pendientes y además GET  
 @ticket_bp.route('/ticket/pendientes',methods=['GET'])
 def ticketsPendientes():
     try:
-        conn = get_connection()
+        conn = get_connection()#Hacemos la conexión a nuestra base de datos
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM tickets WHERE estado = 'pendiente'")
-        tickets = cursor.fetchall()
-        cursor.close()
-        conn.close()
+        cursor.execute("SELECT * FROM tickets WHERE estado = 'pendiente'")#Indicamos que solo queremos los que tienen como estado pendiente
+        tickets = cursor.fetchall()#Almacenamos los resultados
+        cursor.close()#Cerramos la conexión
+        conn.close()#Cerramos la conexión a la base de datos
 
+        #Si se encontraron tickets entonces los mostramos en formato JSON y mostramos código de éxito 200
         if tickets:
             return jsonify(tickets),200
+        #En caso de no encontrar tickets pendientes entonces mostramos el respectivo mensaje.
         else:
             return jsonify({'message':'No hay tickets pendientes'}),200
     except Exception as e:
-        return jsonify({'message':str(e)}),500
-    
+        return jsonify({'message':str(e)}),500#En caso de que algo falle mostramos el respectivo mensaje y error en el servidor
+
+#Ahora creamos la función de tickets completados, usando nuevamente el método GET    
 @ticket_bp.route('/ticket/completados',methods=['GET'])
 def ticketsCompletados():
     try:
-        conn = get_connection()
+        conn = get_connection()#Hacemos la conexión con la base de datos
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM tickets WHERE estado = 'completado'")
-        tickets = cursor.fetchall()
-        cursor.close()
-        conn.close()
+        cursor.execute("SELECT * FROM tickets WHERE estado = 'completado'")#Ejecutamos el qery usando como filtro el estado de completado
+        tickets = cursor.fetchall()#Almacenamos los resultados
+        cursor.close()#Cerramos la conexión
+        conn.close()#Cerramos la conexión con la base de datos
 
+        #Si se encontraron tickets entonces mostramos el respectivo mensaje
         if tickets:
             return jsonify(tickets),200
-        else:
+        else:#En caso de no encontrar mostramos el mensaje de error en el servidor
             return jsonify({'message':'No hay tickets completados'}),200
-    except Exception as e:
+    except Exception as e:#En caso de fallar durante el proceso mostramos el respectivo mensaje, con error en el servidor.
         return jsonify({'message':str(e)}),500

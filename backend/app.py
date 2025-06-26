@@ -1,7 +1,6 @@
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_cors import CORS
 from routes.tickets import ticket_bp
-from db import get_connection
 
 app = Flask(__name__)
 CORS(app)

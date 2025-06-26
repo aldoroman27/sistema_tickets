@@ -1,11 +1,34 @@
 import { useTickets } from '../../src/context/ticketContext';
+import { useEffect, useState } from 'react';
 import './ConsultarTicket.css';
+import axios from 'axios';
 
 export const ConsultarTicket = () => {
-  const { tickets } = useTickets();
+  const [tickets, setTickets] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState('');
 
-  // Solo los tickets pendientes
+  useEffect(() => {
+    const obtenerTickets = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/tickets');
+        setTickets(response.data);
+        setCargando(false);
+      } catch (error) {
+        console.error('Error al obtener tickets:', error);
+        setError('Hubo un problema al obtener los tickets');
+        setCargando(false);
+      }
+    };
+
+    obtenerTickets();
+  }, []);
+
+  // Filtramos los que estén pendientes
   const ticketsPendientes = tickets.filter(ticket => ticket.estado === 'pendiente');
+
+  if (cargando) return <p>Cargando tickets...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="consultar-container">
@@ -29,10 +52,10 @@ export const ConsultarTicket = () => {
           </thead>
           <tbody>
             {ticketsPendientes.map(ticket => (
-              <tr key={ticket.id}>
+              <tr key={ticket.idTicket}>
                 <td>{ticket.idTicket}</td>
                 <td>{ticket.nombreCompleto}</td>
-                <td>{ticket.id}</td>
+                <td>{ticket.idEmpleado}</td>
                 <td>{ticket.departamento}</td>
                 <td>{ticket.equipo}</td>
                 <td>{ticket.descripcion}</td>

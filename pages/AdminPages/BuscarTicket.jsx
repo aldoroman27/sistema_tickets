@@ -1,28 +1,31 @@
 import './BuscarTicket.css';
 import { useState } from 'react';
-import { useTickets } from '../../src/context/ticketContext';
+import axios from 'axios';
 
 export const BuscarTicket = () => {
-  const { tickets } = useTickets();
   const [idBuscar, setIdBuscar] = useState('');
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
 
-  const handleBuscar = () => {
+  const handleBuscar = async () => {
     if (!/^\d+$/.test(idBuscar)) {
       setMensaje('⚠️ Ingresa un ID numérico válido');
       setTicket(null);
       return;
     }
 
-    const resultado = tickets.find(t => String(t.idTicket) === idBuscar);
-
-    if (resultado) {
-      setTicket(resultado);
+    try {
+      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      setTicket(response.data);
       setMensaje('');
-    } else {
+    } catch (error) {
+      console.error(error);
       setTicket(null);
-      setMensaje('❌ Ticket no encontrado.');
+      if (error.response && error.response.status === 404) {
+        setMensaje('❌ Ticket no encontrado.');
+      } else {
+        setMensaje('❌ Error al conectar con el servidor.');
+      }
     }
   };
 
@@ -58,3 +61,4 @@ export const BuscarTicket = () => {
 };
 
 export default BuscarTicket;
+

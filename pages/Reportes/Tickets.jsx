@@ -1,10 +1,10 @@
 import './Tickets.css';
 import { useState, useEffect } from 'react';
-import { useTickets } from '../../src/context/ticketContext.jsx'; 
+import axios from 'axios';
+
+
 export const Tickets = () => {
 
-  const { agregarTicket } = useTickets();
-  const [idGenerado, setIdGenerado] = useState(null);
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
   const [ticketData, setTicketData] = useState({
     idTicket: '',
@@ -19,6 +19,7 @@ export const Tickets = () => {
   });
   //Mensaje de registro éxitoso de nuestro ticket
   const [mensajeExito, setMensajeExito] = useState('');
+  const[idGenerado, setIdGenerado] = useState(null);
 
   useEffect(() => {
     // Genera la fecha actual automáticamente al cargar el componente
@@ -26,32 +27,37 @@ export const Tickets = () => {
     setTicketData(prev => ({ ...prev, fecha: fechaActual }));
   }, []);
 
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5000/tickets', ticketData);
+      console.log(response.data);
+      setIdGenerado(response.data.idTicket); // Si tu backend regresa el ID, puedes mostrarlo aquí
+      setMensajeExito('✅ Ticket enviado correctamente');
+      setIdGenerado(response.data.idTicket);
+
+      setTicketData(prev => ({
+        idEmpleado: '',
+        nombreCompleto: '',
+        correoElectronico: '',
+        departamento: '',
+        equipo: '',
+        descripcion: '',
+        fecha: prev.fecha,
+        estado: 'pendiente'
+      }));
+      setTimeout(() => {
+        setMensajeExito('');
+      }, 4000);
+    } catch (error) {
+      console.error('Error al enviar ticket:', error);
+    }
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTicketData(prev => ({ ...prev, [name]: value }));
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const nuevo = agregarTicket(ticketData);//Recibimos el ticket con toda la info
-    setIdGenerado(nuevo.idTicket);//Mostramos la info del ticket además de Mostrar el ID del ticket para el usuario
-    console.log('Datos del ticket:', ticketData);
-
-    // Limpiar los campos (excepto la fecha)
-    setTicketData(prev => ({
-        idEmpleado: '',
-        nombreCompleto: '',
-        departamento: '',
-        equipo: '',
-        descripcion: '',
-        fecha: prev.fecha, // mantenemos la fecha actual.
-        status: 'Pendiente' //Mantenemos el status de pendiente siempre.
-  }));
-
-  // Ocultar mensaje después de unos segundos (opcional)
-  setTimeout(() => setMensajeExito(''), 3000);
-  };
-
   return (
     <div className="container">
       <div>
