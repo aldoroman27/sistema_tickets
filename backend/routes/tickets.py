@@ -47,6 +47,8 @@ def crear_ticket():
                         'idTicket': nuevo_id
                         }),201
     except Exception as e: #En caso de fallar mandamos una exception con la información del error
+        if conn:
+            conn.close()
         return jsonify({'error':str(e)}),500 #Mostramos el código 500 que significa error en el servidor.
 
 #Definimos nuestra función para poder mostrar nuestro tickets, en este caso será para tickets pendientes.
@@ -62,6 +64,8 @@ def obtenerTickets():
         cursor.close()
         return jsonify(tickets)#Retornamos un formato en JSON de los tickets que tenemos disponibles
     except Exception as e:#Lanzamos una exception en caso de fallar
+        if conn:
+            conn.close()
         return jsonify({"error":str(e)}),500 #Mostramos un mensaje de erro además de mostrar error en el servidor.
 
 #Hacemos la petición a nuestra ruta dentro de nuestro servidor.
@@ -83,8 +87,9 @@ def buscarTicket(idTicket):
             return jsonify({'message': "Ticket no encontrado!"}),404
         pass
     except Exception as e:
+        if conn:
+            conn.close()
         return jsonify({'error':str(e)}),500 #Mostramos en caso de fallar error a la conexión del servidor.
-    pass
 
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['DELETE'])
 def eliminarTicket(idTicket):
@@ -106,6 +111,8 @@ def eliminarTicket(idTicket):
         else:
             return jsonify({'message':"error no encontramos el ticket que buscabas"}),404
     except Exception as e:
+        if conn:
+            conn.close()
         return jsonify({'error': str(e)}),500 #Mostramos el error en caso de fallar y lo mostramos como error de servidor
 
 #Indicamos la ruta que vamos a seguir además de la búsqueda de un ticket y el método que vamos a utilizar.
@@ -147,6 +154,8 @@ def modificarTicket(idTicket):
         else:
             return jsonify({'message':"Ticket no encontrado"}),404
     except Exception as e:
+        if conn:
+            conn.close()
         return jsonify({'error': str(e)}), 500
 
 #Esta función nos ayudará a mostrar los tickets que tenemos pendientes, usando el método pendientes y además GET  
@@ -168,6 +177,8 @@ def ticketsPendientes():
         else:
             return jsonify({'message':'No hay tickets pendientes'}),200
     except Exception as e:
+        if conn:
+            conn.close()
         return jsonify({'message':str(e)}),500#En caso de que algo falle mostramos el respectivo mensaje y error en el servidor
 
 #Ahora creamos la función de tickets completados, usando nuevamente el método GET    
@@ -188,4 +199,6 @@ def ticketsCompletados():
         else:#En caso de no encontrar mostramos el mensaje de error en el servidor
             return jsonify({'message':'No hay tickets completados'}),200
     except Exception as e:#En caso de fallar durante el proceso mostramos el respectivo mensaje, con error en el servidor.
+        if conn:
+            conn.close()
         return jsonify({'message':str(e)}),500

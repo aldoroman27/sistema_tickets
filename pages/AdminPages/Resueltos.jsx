@@ -1,16 +1,37 @@
-import React from 'react'
-import { useTickets } from '../../src/context/ticketContext';
-import './Resueltos.css'
+import './Resueltos.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 export const Resueltos = () => {
-  const { tickets } = useTickets();
-  // Solo los tickets completados / liberados
-  const ticketsPendientes = tickets.filter(ticket => ticket.estado === 'completado');
+  const [ticketsCompletados, setTicketsCompletados] = useState([]);
+  const [mensaje, setMensaje] = useState('');
+
+  useEffect(() => {
+    const obtenerTicketsCompletados = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/ticket/completados');
+        if (Array.isArray(response.data)) {
+          setTicketsCompletados(response.data);
+        } else {
+          setMensaje('❌ Error en el formato de los datos recibidos.');
+        }
+      } catch (error) {
+        console.error(error);
+        setMensaje('❌ Error al obtener tickets completados.');
+      }
+    };
+
+    obtenerTicketsCompletados();
+  }, []);
+
   return (
-     <div className="completados-container">
+    <div className="completados-container">
       <h2>Tickets Completados</h2>
 
-      {ticketsPendientes.length === 0 ? (
-        <p>No hay tickets pendientes actualmente.</p>
+      {mensaje && <p>{mensaje}</p>}
+
+      {ticketsCompletados.length === 0 && !mensaje ? (
+        <p>No hay tickets completados actualmente.</p>
       ) : (
         <table className="tabla-tickets-completados">
           <thead>
@@ -26,11 +47,11 @@ export const Resueltos = () => {
             </tr>
           </thead>
           <tbody>
-            {ticketsPendientes.map(ticket => (
-              <tr key={ticket.id}>
+            {ticketsCompletados.map(ticket => (
+              <tr key={ticket.idTicket}>
                 <td>{ticket.idTicket}</td>
                 <td>{ticket.nombreCompleto}</td>
-                <td>{ticket.id}</td>
+                <td>{ticket.idEmpleado}</td>
                 <td>{ticket.departamento}</td>
                 <td>{ticket.equipo}</td>
                 <td>{ticket.descripcion}</td>
@@ -42,7 +63,7 @@ export const Resueltos = () => {
         </table>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Resueltos;

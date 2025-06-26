@@ -1,14 +1,13 @@
 import './EliminarTicket.css';
 import { useState } from 'react';
-import { useTickets } from '../../src/context/ticketContext';
+import axios from 'axios';
 
 export const EliminarTicket = () => {
-  const { tickets, eliminarTicket } = useTickets();
   const [idBuscar, setIdBuscar] = useState('');
   const [ticketEncontrado, setTicketEncontrado] = useState(null);
   const [mensaje, setMensaje] = useState('');
 
-  const handleBuscar = () => {
+  const handleBuscar = async () => {
     if (!idBuscar.trim()) {
       setMensaje('⚠️ Ingresa un ID para buscar.');
       return;
@@ -19,29 +18,36 @@ export const EliminarTicket = () => {
       return;
     }
 
-    if (tickets.length === 0) {
-      setMensaje('⚠️ No hay tickets registrados.');
-      return;
-    }
-
-    const resultado = tickets.find(
-      t => String(t.idTicket) === idBuscar && t.estado === 'pendiente'
-    );
-
-    if (resultado) {
-      setTicketEncontrado(resultado);
-      setMensaje('');
-    } else {
+    try {
+      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      if (response.data.estado === 'pendiente') {
+        setTicketEncontrado(response.data);
+        setMensaje('');
+      } else {
+        setTicketEncontrado(null);
+        setMensaje('❌ El ticket no está pendiente o ya fue completado.');
+      }
+    } catch (error) {
+      console.error(error);
       setTicketEncontrado(null);
-      setMensaje('❌ Ticket no encontrado o ya fue eliminado/liberado.');
+      if (error.response && error.response.status === 404) {
+        setMensaje('❌ Ticket no encontrado.');
+      } else {
+        setMensaje('❌ Error al buscar el ticket.');
+      }
     }
   };
 
-  const handleEliminar = () => {
-    eliminarTicket(ticketEncontrado.idTicket);
-    setMensaje('✅ Ticket eliminado correctamente.');
-    setTicketEncontrado(null);
-    setIdBuscar('');
+  const handleEliminar = async () => {
+    try {
+      await axios.delete(`http://localhost:5000/tickets/${ticketEncontrado.idTicket}`);
+      setMensaje('✅ Ticket eliminado correctamente.');
+      setTicketEncontrado(null);
+      setIdBuscar('');
+    } catch (error) {
+      console.error(error);
+      setMensaje('❌ Error al eliminar el ticket.');
+    }
   };
 
   return (
@@ -68,7 +74,9 @@ export const EliminarTicket = () => {
           <p><strong>Descripción:</strong> {ticketEncontrado.descripcion}</p>
           <p><strong>Estado:</strong> {ticketEncontrado.estado}</p>
           <strong>⚠️ Verifique la información antes de borrar.</strong><br />
-          <button className="btn-eliminar" onClick={handleEliminar}>Eliminar Ticket</button>
+          <button className="btn-eliminar" onClick={handleEliminar}>
+            Eliminar Ticket
+          </button>
         </div>
       )}
     </div>
@@ -76,3 +84,4 @@ export const EliminarTicket = () => {
 };
 
 export default EliminarTicket;
+

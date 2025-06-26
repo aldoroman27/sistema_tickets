@@ -1,31 +1,57 @@
 import './LiberarTicket.css';
 import { useState } from 'react';
-import { useTickets } from '../../src/context/ticketContext';
-
+import axios from 'axios';
 
 export const LiberarTicket = () => {
-
-  const { tickets, liberarTicket } = useTickets();
   const [idBuscar, setIdBuscar] = useState('');
   const [ticketEncontrado, setTicketEncontrado] = useState(null);
   const [mensaje, setMensaje] = useState('');
 
-  const handleBuscar = () => {
-    const resultado = tickets.find(t => String(t.idTicket) && t.status === 'Pendiente');
-    if (resultado) {
-      setTicketEncontrado(resultado);
-      setMensaje('');
-    } else {
+  const handleBuscar = async () => {
+    if (!idBuscar.trim()) {
+      setMensaje('⚠️ Ingresa un ID para buscar.');
+      return;
+    }
+
+    if (!/^\d+$/.test(idBuscar)) {
+      setMensaje('⚠️ El ID debe ser un número.');
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      const ticket = response.data;
+
+      if (ticket.estado === 'pendiente') {
+        setTicketEncontrado(ticket);
+        setMensaje('');
+      } else {
+        setTicketEncontrado(null);
+        setMensaje('❌ El ticket ya está completado.');
+      }
+    } catch (error) {
+      console.error(error);
       setTicketEncontrado(null);
-      setMensaje('❌ Ticket no encontrado o ya está completado.');
+      if (error.response && error.response.status === 404) {
+        setMensaje('❌ Ticket no encontrado.');
+      } else {
+        setMensaje('❌ Error al buscar el ticket.');
+      }
     }
   };
 
-  const handleLiberar = () => {
-    liberarTicket(ticketEncontrado.idTicket);
-    setMensaje('✅ Ticket liberado correctamente.');
-    setTicketEncontrado(null);
-    setIdBuscar('');
+  const handleLiberar = async () => {
+    try {
+      await axios.put(`http://localhost:5000/tickets/${ticketEncontrado.idTicket}`, {
+        estado: 'completado'
+      });
+      setMensaje('✅ Ticket liberado correctamente.');
+      setTicketEncontrado(null);
+      setIdBuscar('');
+    } catch (error) {
+      console.error(error);
+      setMensaje('❌ Error al liberar el ticket.');
+    }
   };
 
   return (
@@ -41,20 +67,24 @@ export const LiberarTicket = () => {
         />
         <button onClick={handleBuscar}>Buscar</button>
       </div>
+
       {mensaje && <p className="mensaje">{mensaje}</p>}
+
       {ticketEncontrado && (
         <div className="ticket-info">
-          <p><strong>Id Ticket:</strong>{ticketEncontrado.idTicket}</p>
+          <p><strong>Id Ticket:</strong> {ticketEncontrado.idTicket}</p>
           <p><strong>Empleado:</strong> {ticketEncontrado.nombreCompleto}</p>
           <p><strong>Equipo:</strong> {ticketEncontrado.equipo}</p>
           <p><strong>Descripción:</strong> {ticketEncontrado.descripcion}</p>
-          <p><strong>Estado:</strong> {ticketEncontrado.status}</p>
+          <p><strong>Estado:</strong> {ticketEncontrado.estado}</p>
 
-          <button className="btn-liberar" onClick={handleLiberar}>Marcar como Completado</button>
+          <button className="btn-liberar" onClick={handleLiberar}>
+            Marcar como Completado
+          </button>
         </div>
       )}
     </div>
   );
-}
+};
 
-export default LiberarTicket
+export default LiberarTicket;

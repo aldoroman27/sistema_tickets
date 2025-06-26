@@ -1,26 +1,30 @@
 import './ModificarTicket.css';
 import { useState } from 'react';
-import { useTickets } from '../../src/context/ticketContext';
+import axios from 'axios';
 
 export const ModificarTicket = () => {
-  const { tickets, modificarTicket } = useTickets();
   const [idBuscar, setIdBuscar] = useState('');
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
 
-  const handleBuscar = () => {
+  const handleBuscar = async () => {
     if (!/^\d+$/.test(idBuscar)) {
       setMensaje('⚠️ Ingresa un ID numérico válido');
       return;
     }
 
-    const encontrado = tickets.find(t => String(t.idTicket) === idBuscar);
-    if (encontrado) {
-      setTicket(encontrado);
+    try {
+      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      setTicket(response.data);
       setMensaje('');
-    } else {
+    } catch (error) {
+      console.error(error);
       setTicket(null);
-      setMensaje('❌ Ticket no encontrado.');
+      if (error.response && error.response.status === 404) {
+        setMensaje('❌ Ticket no encontrado.');
+      } else {
+        setMensaje('❌ Error al buscar el ticket.');
+      }
     }
   };
 
@@ -29,11 +33,24 @@ export const ModificarTicket = () => {
     setTicket(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleGuardar = () => {
-    modificarTicket(ticket.idTicket, ticket);
-    setMensaje('✅ Cambios guardados correctamente.');
-    setIdBuscar('');
-    setTicket(null);
+  const handleGuardar = async () => {
+    try {
+      const datosModificados = {
+        nombreCompleto: ticket.nombreCompleto,
+        departamento: ticket.departamento,
+        equipo: ticket.equipo,
+        descripcion: ticket.descripcion
+        // Puedes incluir más campos si lo deseas
+      };
+
+      await axios.put(`http://localhost:5000/tickets/${ticket.idTicket}`, datosModificados);
+      setMensaje('✅ Cambios guardados correctamente.');
+      setTicket(null);
+      setIdBuscar('');
+    } catch (error) {
+      console.error(error);
+      setMensaje('❌ Error al guardar los cambios.');
+    }
   };
 
   return (
@@ -72,8 +89,8 @@ export const ModificarTicket = () => {
             <option value="Sistemas">Sistemas</option>
             <option value="Calidad">Calidad</option>
             <option value="Maquinados">Maquinados</option>
-            <option value="Diseño mecanico">Diseño Mecanico</option>
-            <option value="A&C">Automatización y control</option>
+            <option value="Diseño mecanico">Diseño Mecánico</option>
+            <option value="A&C">Automatización y Control</option>
             <option value="Proyectos">Proyectos</option>
           </select>
 
