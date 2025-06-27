@@ -10,7 +10,7 @@ export const CheckTickets = () => {
           Consultar tickets pendientes
         </button>
         <button className="btn btn-liberar" onClick={() => navigate('/LiberarTicket')}>
-          Liberar tickets
+           Marcar tickets como completados
         </button>
         <button className="btn btn-eliminar" onClick={() => navigate('/EliminarTicket')}>
           Eliminar tickets

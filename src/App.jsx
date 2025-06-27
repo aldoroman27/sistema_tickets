@@ -10,7 +10,8 @@ import { ConsultarTicket } from '../pages/AdminPages/ConsultarTicket.jsx';
 import { EliminarTicket } from '../pages/AdminPages/EliminarTicket.jsx';
 import { ModificarTicket } from '../pages/AdminPages/ModificarTicket.jsx';
 import { Resueltos } from '../pages/AdminPages/Resueltos.jsx';
-
+import { Home } from '../pages/Home/Home.jsx';
+import { GuiaUso } from '../pages/GuiaUso/GuiaUso.jsx'
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,8 @@ function App() {
           <Route path='/EliminarTicket' element={<EliminarTicket/>}/>
           <Route path='/ModificarTicket' element={<ModificarTicket/>}/>
           <Route path='/Resueltos' element={<Resueltos/>}/>
+          <Route path='/Home' element={<Home />}/>
+          <Route path='/GuiaUso' element={<GuiaUso/>}/>
         </Routes>
       </Router>
     </div>

@@ -27,7 +27,7 @@ export const Login = () => {
       localStorage.setItem('usuario', JSON.stringify(response.data));
 
       setMensaje('✅ Inicio de sesión exitoso.');
-      navigate('/panel'); // redirige al panel principal
+      navigate('/Tickets'); // redirige al panel principal
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 401) {
