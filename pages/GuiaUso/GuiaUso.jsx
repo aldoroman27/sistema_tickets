@@ -5,7 +5,7 @@ export const GuiaUso = () => {
   const handleDescargar = () => {
     const link = document.createElement('a');
     link.href = '/guia_uso.pdf'; //El pdf se encuentra en la carpeta PUBLIC
-    link.download = 'Guia_de_Uso_Sistema_TI.pdf';//De descargará con este nombre
+    link.download = 'dummy.pdf';//De descargará con este nombre
     link.click();
   };
 

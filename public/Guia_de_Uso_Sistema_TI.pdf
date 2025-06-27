@@ -15,6 +15,6 @@ window.$RefreshSig$ = () => (type) => type;</script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx?t=1751053321422"></script>
+    <script type="module" src="/src/main.jsx?t=1751055770541"></script>
   </body>
 </html>
