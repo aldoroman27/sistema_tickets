@@ -1,73 +1,77 @@
-import { useTickets } from '../../src/context/ticketContext';
-import { useEffect, useState } from 'react';
-import './ConsultarTicket.css';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as XLSX from 'xlsx';
+import './ConsultarTicket.css';
 
 export const ConsultarTicket = () => {
   const [tickets, setTickets] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    const obtenerTickets = async () => {
+    const fetchTickets = async () => {
       try {
         const response = await axios.get('http://localhost:5000/tickets');
-        setTickets(response.data);
-        setCargando(false);
+        const pendientes = response.data.filter(ticket => ticket.estado === 'pendiente');
+        setTickets(pendientes);
       } catch (error) {
         console.error('Error al obtener tickets:', error);
-        setError('Hubo un problema al obtener los tickets');
-        setCargando(false);
       }
     };
 
-    obtenerTickets();
+    fetchTickets();
   }, []);
 
-  // Filtramos los que estén pendientes
-  const ticketsPendientes = tickets.filter(ticket => ticket.estado === 'pendiente');
+  const exportarExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(tickets);//Generamos una tabla usando la información que nos llegó en formato JSON.
+    const workbook = XLSX.utils.book_new();//Generamos un libro nuevo
+    XLSX.utils.book_append_sheet(workbook, worksheet, "TicketsPendientes");//Asignamos el nombre del libro
 
-  if (cargando) return <p>Cargando tickets...</p>;
-  if (error) return <p>{error}</p>;
+    XLSX.writeFile(workbook, "tickets_pendientes.xlsx");//Finalmente creamos un archivo con ese nombre
+  };
 
   return (
     <div className="consultar-container">
       <h2>Tickets Pendientes</h2>
 
-      {ticketsPendientes.length === 0 ? (
+      {tickets.length === 0 ? (
         <p>No hay tickets pendientes actualmente.</p>
       ) : (
-        <table className="tabla-tickets">
-          <thead>
-            <tr>
-              <th>ID Ticket</th>
-              <th>Empleado</th>
-              <th>ID Empleado</th>
-              <th>Departamento</th>
-              <th>Equipo</th>
-              <th>Descripción</th>
-              <th>Fecha</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ticketsPendientes.map(ticket => (
-              <tr key={ticket.idTicket}>
-                <td>{ticket.idTicket}</td>
-                <td>{ticket.nombreCompleto}</td>
-                <td>{ticket.idEmpleado}</td>
-                <td>{ticket.departamento}</td>
-                <td>{ticket.equipo}</td>
-                <td>{ticket.descripcion}</td>
-                <td>{ticket.fecha}</td>
-                <td>{ticket.estado}</td>
+        <>
+          <table className="tabla-tickets">
+            <thead>
+              <tr>
+                <th>ID Ticket</th>
+                <th>Empleado</th>
+                <th>ID Empleado</th>
+                <th>Departamento</th>
+                <th>Equipo</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Estado</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {tickets.map(ticket => (
+                <tr key={ticket.id}>
+                  <td>{ticket.idTicket}</td>
+                  <td>{ticket.nombreCompleto}</td>
+                  <td>{ticket.id}</td>
+                  <td>{ticket.departamento}</td>
+                  <td>{ticket.equipo}</td>
+                  <td>{ticket.descripcion}</td>
+                  <td>{ticket.fecha}</td>
+                  <td>{ticket.estado}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button className="btn-reportes" onClick={exportarExcel}>
+            📥 Generar Reporte Excel
+          </button>
+        </>
       )}
     </div>
   );
 };
 
 export default ConsultarTicket;
+

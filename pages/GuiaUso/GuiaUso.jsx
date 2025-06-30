@@ -16,7 +16,7 @@ export const GuiaUso = () => {
         Aquí podrás descargar la guía paso a paso sobre cómo usar el sistema de tickets.
       </p>
       <button className='btn-descargar' onClick={handleDescargar}>
-        📥 Descargar la Guía en PDF
+        ⬇️ Descargar la Guía en PDF
       </button>
     </div>
   );

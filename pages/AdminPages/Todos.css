@@ -1,4 +1,4 @@
-.consultar-container {
+.allTickets-container {
   max-width: 95%;
   margin: 40px auto;
   padding: 20px;
@@ -9,56 +9,38 @@
 }
 
 
-.consultar-container h2 {
+.allTickets-container h2 {
   text-align: center;
   color: #2f3542;
   margin-bottom: 20px;
 }
 
-.tabla-tickets {
+.tabla-allTickets{
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
 
-.tabla-tickets thead {
+.tabla-allTickets thead {
   background-color: #f1f2f6;
 }
 
-.tabla-tickets th, .tabla-tickets td {
+.tabla-allTickets th, .tabla-allTickets td {
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-.tabla-tickets tr:hover {
+.tabla-allTickets tr:hover {
   background-color: #f8f9fa;
 }
 
-.tabla-tickets td:last-child {
+.tabla-allTickets td:last-child {
   text-transform: capitalize;
   font-weight: 500;
-  color: #e67e22;
+  color: #000000;
 }
-.tabla-tickets td:first-child {
+.tabla-allTickets td:first-child {
   font-weight: bold;
   color: #2d3436;
 }
-
-.btn-reportes {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 16px;
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-reportes:hover {
-  background-color: #27ae60;
-}
-

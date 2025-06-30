@@ -24,6 +24,12 @@ export const CheckTickets = () => {
         <button className="btn btn-resueltos" onClick={() => navigate('/Resueltos')}>
           Tickets Resueltos
         </button>
+        <button className="btn btn-mostrarTodos" onClick={() => navigate('/Todo')}>
+          Mostrar todos los tickets
+        </button>
+        <button>
+          Cerrar Sesión
+        </button>
       </div>
     </div>
   );

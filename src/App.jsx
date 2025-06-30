@@ -11,7 +11,11 @@ import { EliminarTicket } from '../pages/AdminPages/EliminarTicket.jsx';
 import { ModificarTicket } from '../pages/AdminPages/ModificarTicket.jsx';
 import { Resueltos } from '../pages/AdminPages/Resueltos.jsx';
 import { Home } from '../pages/Home/Home.jsx';
-import { GuiaUso } from '../pages/GuiaUso/GuiaUso.jsx'
+import { GuiaUso } from '../pages/GuiaUso/GuiaUso.jsx';
+import { Todos } from '../pages/AdminPages/Todos.jsx';
+import { ProtectedRoute } from './components/ProtectedRoute.jsx';
+import { AdminRoute } from './components/AdminRoute.jsx';
+
 function App() {
   return (
     <div className="App">
@@ -19,16 +23,42 @@ function App() {
         <NavBar/>
         <Routes>
           <Route path='/Login' element={<Login/>} />
-          <Route path='/Tickets' element={<Tickets/>}/>
-          <Route path='/CheckTickets' element={<CheckTickets/>}/>
-          <Route path='/BuscarTicket' element={<BuscarTicket/>}/>
-          <Route path='/LiberarTicket' element={<LiberarTicket/>}/>
-          <Route path='/ConsultarTicket' element={<ConsultarTicket/>}/>
-          <Route path='/EliminarTicket' element={<EliminarTicket/>}/>
-          <Route path='/ModificarTicket' element={<ModificarTicket/>}/>
-          <Route path='/Resueltos' element={<Resueltos/>}/>
-          <Route path='/Home' element={<Home />}/>
-          <Route path='/GuiaUso' element={<GuiaUso/>}/>
+          {/* Rutas protegidas por login */}
+          <Route path="/Home" element={
+            <ProtectedRoute><Home /></ProtectedRoute>
+          } />
+          <Route path="/Tickets" element={
+            <ProtectedRoute><Tickets /></ProtectedRoute>
+          } />
+          <Route path="/GuiaUso" element={
+            <ProtectedRoute><GuiaUso /></ProtectedRoute>
+          } />
+
+          {/* Rutas solo para admin */}
+          <Route path="/CheckTickets" element={
+            <AdminRoute><CheckTickets /></AdminRoute>
+          } />
+          <Route path="/BuscarTicket" element={
+            <AdminRoute><BuscarTicket /></AdminRoute>
+          } />
+          <Route path="/LiberarTicket" element={
+            <AdminRoute><LiberarTicket /></AdminRoute>
+          } />
+          <Route path="/ConsultarTicket" element={
+            <AdminRoute><ConsultarTicket /></AdminRoute>
+          } />
+          <Route path="/EliminarTicket" element={
+            <AdminRoute><EliminarTicket /></AdminRoute>
+          } />
+          <Route path="/ModificarTicket" element={
+            <AdminRoute><ModificarTicket /></AdminRoute>
+          } />
+          <Route path="/Resueltos" element={
+            <AdminRoute><Resueltos /></AdminRoute>
+          } />
+          <Route path="/Todo" element={
+            <AdminRoute><Todos /></AdminRoute>
+          } />
         </Routes>
       </Router>
     </div>

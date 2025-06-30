@@ -1,61 +1,66 @@
 .admin-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px 20px;
-  background-color: #f5f7fa;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .titulo-admin {
-  font-size: 24px;
-  margin-bottom: 24px;
+  font-size: 30px;
+  margin-bottom: 30px;
   color: #2c3e50;
-  font-weight: bold;
+  font-weight: 700;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 12px;
 }
 
 .botones-admin {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .btn {
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   color: white;
-  transition: transform 0.2s ease, background-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  white-space: normal;
+  line-height: 1.4;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .btn:hover {
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
 }
 
-.btn-consultar {
-  background-color: #2980b9;
-}
+/* Colores específicos */
+.btn-consultar     { background-color: #2980b9; }
+.btn-liberar       { background-color: #27ae60; }
+.btn-eliminar      { background-color: #c0392b; }
+.btn-modificar     { background-color: #8e44ad; }
+.btn-buscar        { background-color: #e67e22; }
+.btn-resueltos     { background-color: #16a085; }
+.btn-mostrarTodos  { background-color: #42279b; }
 
-.btn-liberar {
-  background-color: #27ae60;
-}
+/* Responsive: 1 columna en pantallas pequeñas */
+@media (max-width: 600px) {
+  .botones-admin {
+    grid-template-columns: 1fr;
+  }
 
-.btn-eliminar {
-  background-color: #c0392b;
-}
-
-.btn-modificar {
-  background-color: #8e44ad;
-}
-
-.btn-buscar {
-  background-color: #e67e22;
-}
-
-.btn-resueltos {
-  background-color: #16a085;
+  .btn {
+    font-size: 16px;
+    padding: 16px;
+  }
 }

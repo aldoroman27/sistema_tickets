@@ -1,48 +1,40 @@
-import './Resueltos.css';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import * as XLSX from 'xlsx';
+import { useEffect, useState } from 'react';
+import './Todos.css'
 
-export const Resueltos = () => {
-  const [ticketsCompletados, setTicketsCompletados] = useState([]);
+export const Todos = () => {
+  const [allTickets, setTickets] = useState([]);
   const [mensaje, setMensaje] = useState('');
 
   useEffect(() => {
-    const obtenerTicketsCompletados = async () => {
+    const obtenerallTickets = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/ticket/completados');
+        const response = await axios.get('http://localhost:5000/tickets');
         if (Array.isArray(response.data)) {
-          setTicketsCompletados(response.data);
+          setTickets(response.data);
         } else {
           setMensaje('❌ Error en el formato de los datos recibidos.');
         }
       } catch (error) {
         console.error(error);
-        setMensaje('❌ Error al obtener tickets completados.');
+        setMensaje('❌ Error al obtener tickets.');
       }
     };
 
-    obtenerTicketsCompletados();
+    obtenerallTickets();
   }, []);
 
-  const exportarExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(ticketsCompletados);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook,worksheet,"TicketsPendientes");
-    XLSX.writeFile(workbook, "tickets_completados.xlsx");
-  };
-
   return (
-    <div className="completados-container">
-      <h2>Tickets Completados</h2>
+    <div className="allTickets-container">
+      <h2>Mostrando Todos los Tickets</h2>
 
       {mensaje && <p>{mensaje}</p>}
 
-      {ticketsCompletados.length === 0 && !mensaje ? (
-        <p>No hay tickets completados actualmente.</p>
+      {allTickets.length === 0 && !mensaje ? (
+        <p>No hay tickets actualmente.</p>
       ) : (
         <>
-          <table className="tabla-tickets-completados">
+          <table className="tabla-allTickets">
             <thead>
               <tr>
                 <th>ID Ticket</th>
@@ -56,7 +48,7 @@ export const Resueltos = () => {
               </tr>
             </thead>
             <tbody>
-              {ticketsCompletados.map(ticket => (
+              {allTickets.map(ticket => (
                 <tr key={ticket.idTicket}>
                   <td>{ticket.idTicket}</td>
                   <td>{ticket.nombreCompleto}</td>
@@ -70,13 +62,10 @@ export const Resueltos = () => {
               ))}
             </tbody>
           </table>
-          <button className='btn-reportes' onClick={exportarExcel}>
-            Generar Reporte Excel.
-          </button>
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Resueltos;
+export default Todos;

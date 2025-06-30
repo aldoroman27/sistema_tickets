@@ -25,9 +25,12 @@ export const Login = () => {
 
       // Guardamos los datos del usuario en localStorage (puedes usar context si prefieres)
       localStorage.setItem('usuario', JSON.stringify(response.data));
-
       setMensaje('✅ Inicio de sesión exitoso.');
-      navigate('/Tickets'); // redirige al panel principal
+      if (response.data.admin) {
+        navigate('/ConsultarTicket');
+      } else {
+        navigate('/Home');
+      }
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 401) {

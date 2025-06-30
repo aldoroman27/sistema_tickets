@@ -1,7 +1,6 @@
 /*En esta parte estamos importando de la librería react-roter Link para los links de nuestras distintas páginas*/
-import { Link } from "react-router-dom";
+import { Link, useBeforeUnload, useNavigate } from "react-router-dom";
 /*En este apartado estmoas importando los íconos de cada una de nuestras páginas*/
-import { Ticket } from 'phosphor-react';
 import { User } from 'phosphor-react';
 import { CheckCircle } from 'phosphor-react';
 import { House } from 'phosphor-react';
@@ -21,12 +20,10 @@ export const NavBar = () => {
             <Link to='/Home'>
                 <House size={32}/>
             </Link>
-            <Link to="/Tickets">
-                <Ticket size={32} />
-            </Link>
             <Link to="/CheckTickets">
                 <CheckCircle size={32} />
             </Link>
+            {usuario}
         </div>
     </div>
   );
