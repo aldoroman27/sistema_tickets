@@ -40,17 +40,17 @@ function App() {
         <Route path="/Login" element={<Login />} />
 
         {/* Rutas protegidas (solo accesibles si hay sesión) */}
-        <Route path="/Tickets" element={<ProtectedRoute><Tickets /></ProtectedRoute>} />
-        <Route path="/CheckTickets" element={<ProtectedRoute><CheckTickets /></ProtectedRoute>} />
-        <Route path="/BuscarTicket" element={<ProtectedRoute><BuscarTicket /></ProtectedRoute>} />
-        <Route path="/LiberarTicket" element={<ProtectedRoute><LiberarTicket /></ProtectedRoute>} />
-        <Route path="/ConsultarTicket" element={<ProtectedRoute><ConsultarTicket /></ProtectedRoute>} />
-        <Route path="/EliminarTicket" element={<ProtectedRoute><EliminarTicket /></ProtectedRoute>} />
-        <Route path="/ModificarTicket" element={<ProtectedRoute><ModificarTicket /></ProtectedRoute>} />
-        <Route path="/Resueltos" element={<ProtectedRoute><Resueltos /></ProtectedRoute>} />
-        <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/GuiaUso" element={<ProtectedRoute><GuiaUso /></ProtectedRoute>} />
-        <Route path="/Todo" element={<ProtectedRoute><Todos /></ProtectedRoute>} />
+        <Route path="/Tickets" element={<ProtectedRoute><Tickets /></ProtectedRoute>} />{/*User*/}
+        <Route path="/CheckTickets" element={<ProtectedRoute onlyAdmin={true}><CheckTickets /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/BuscarTicket" element={<ProtectedRoute ><BuscarTicket /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/LiberarTicket" element={<ProtectedRoute onlyAdmin={true}><LiberarTicket /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/ConsultarTicket" element={<ProtectedRoute onlyAdmin={true}><ConsultarTicket /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/EliminarTicket" element={<ProtectedRoute onlyAdmin={true}><EliminarTicket /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/ModificarTicket" element={<ProtectedRoute onlyAdmin={true}><ModificarTicket /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/Resueltos" element={<ProtectedRoute onlyAdmin={true}><Resueltos /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />{/*User*/}
+        <Route path="/GuiaUso" element={<ProtectedRoute><GuiaUso /></ProtectedRoute>} />{/*User*/}
+        <Route path="/Todo" element={<ProtectedRoute onlyAdmin={true}><Todos /></ProtectedRoute>} />{/*Admin*/}
       </Routes>
     </div>
   );

@@ -15,16 +15,20 @@ export const NavBar = () => {
             <div className="Logo">
                 <img src="/mido.png"/>
             </div>
-            <div className="links">
+            <div className="links" title="Iniciar Sesión">
                 <Link to="/Login">
                     <User size={32}/>
                 </Link>
-                <Link to='/Home'>
+                <Link to='/Home' title="Panel de Usuario">
                     <House size={32}/>
                 </Link>
-                <Link to="/CheckTickets">
+
+                {/* Mostrar solo si el usuario es admin */}
+                {usuario?.admin && (
+                <Link to="/CheckTickets" title="Panel de administrador">
                     <CheckCircle size={32} />
                 </Link>
+                )}
             </div>
         </div>
     );
