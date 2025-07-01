@@ -5,11 +5,12 @@ import './ConsultarTicket.css';
 
 export const ConsultarTicket = () => {
   const [tickets, setTickets] = useState([]);
+  const consultar_send = import.meta.env.VITE_consultar_send;
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/tickets');
+        const response = await axios.get(consultar_send);
         const pendientes = response.data.filter(ticket => ticket.estado === 'pendiente');
         setTickets(pendientes);
       } catch (error) {

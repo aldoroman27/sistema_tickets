@@ -6,7 +6,7 @@ export const LiberarTicket = () => {
   const [idBuscar, setIdBuscar] = useState('');
   const [ticketEncontrado, setTicketEncontrado] = useState(null);
   const [mensaje, setMensaje] = useState('');
-
+  const buscar_send = import.meta.env.VITE_buscar_send;
   const handleBuscar = async () => {
     if (!idBuscar.trim()) {
       setMensaje('⚠️ Ingresa un ID para buscar.');
@@ -19,7 +19,7 @@ export const LiberarTicket = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      const response = await axios.get(`${buscar_send}/${idBuscar}`);
       const ticket = response.data;
 
       if (ticket.estado === 'pendiente') {
@@ -42,7 +42,7 @@ export const LiberarTicket = () => {
 
   const handleLiberar = async () => {
     try {
-      await axios.put(`http://localhost:5000/tickets/${ticketEncontrado.idTicket}`, {
+      await axios.put(`${buscar_send}${ticketEncontrado.idTicket}`, {
         estado: 'completado'
       });
       setMensaje('✅ Ticket liberado correctamente.');

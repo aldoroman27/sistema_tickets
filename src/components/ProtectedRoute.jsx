@@ -4,7 +4,7 @@ export const ProtectedRoute = ({ children }) => {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   if (!usuario) {
-    return <Navigate to="/Login" />;
+    return <Navigate to="/" replace/>;
   }
 
   return children;

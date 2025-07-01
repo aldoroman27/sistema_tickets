@@ -6,25 +6,26 @@ export const BuscarTicket = () => {
   const [idBuscar, setIdBuscar] = useState('');
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
-
+  const buscar_send = import.meta.env.VITE_buscar_send;
+  //Este es nuestro handler para buscar información
   const handleBuscar = async () => {
-    if (!/^\d+$/.test(idBuscar)) {
-      setMensaje('⚠️ Ingresa un ID numérico válido');
+    if (!/^\d+$/.test(idBuscar)) {//Definimos que solamente sean carácteres númericos.
+      setMensaje('⚠️ Ingresa un ID numérico válido');//Mostramos error en caso que se intente ingresar otra cosa
       setTicket(null);
       return;
     }
-
+    //En caso de que se introduza información, verificamos dentro de nuestro servidor
     try {
-      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
-      setTicket(response.data);
+      const response = await axios.get(`${buscar_send}/${idBuscar}`);//Esperamos una respuesta del servidor usando axios.
+      setTicket(response.data);//Recuperamos la información del ticket para mostrarlo
       setMensaje('');
-    } catch (error) {
+    } catch (error) {//En caso de fallar o de error mostramos el respectivo mensaje
       console.error(error);
-      setTicket(null);
+      setTicket(null);//No seteamos nada dentro de nuestra función
       if (error.response && error.response.status === 404) {
-        setMensaje('❌ Ticket no encontrado.');
+        setMensaje('❌ Ticket no encontrado.');//En caso de que la información sea erronea, mostramos el respectivo mensaje de error
       } else {
-        setMensaje('❌ Error al conectar con el servidor.');
+        setMensaje('❌ Error al conectar con el servidor.');//Error si es que el servidor no está OK.
       }
     }
   };

@@ -6,11 +6,12 @@ import * as XLSX from 'xlsx';
 export const Resueltos = () => {
   const [ticketsCompletados, setTicketsCompletados] = useState([]);
   const [mensaje, setMensaje] = useState('');
+  const completados_send = import.meta.env.VITE_completados_send;
 
   useEffect(() => {
     const obtenerTicketsCompletados = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/ticket/completados');
+        const response = await axios.get(completados_send);
         if (Array.isArray(response.data)) {
           setTicketsCompletados(response.data);
         } else {

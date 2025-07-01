@@ -1,5 +1,5 @@
 /*En esta parte estamos importando de la librería react-roter Link para los links de nuestras distintas páginas*/
-import { Link, useBeforeUnload, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 /*En este apartado estmoas importando los íconos de cada una de nuestras páginas*/
 import { User } from 'phosphor-react';
 import { CheckCircle } from 'phosphor-react';
@@ -8,23 +8,24 @@ import { House } from 'phosphor-react';
 import "./navbar.css";
 
 export const NavBar = () => {
-  return (
-    <div className="navbar">
-        <div className="Logo">
-            <img src="/mido.png"/>
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario) return null;
+    return (
+        <div className="navbar">
+            <div className="Logo">
+                <img src="/mido.png"/>
+            </div>
+            <div className="links">
+                <Link to="/Login">
+                    <User size={32}/>
+                </Link>
+                <Link to='/Home'>
+                    <House size={32}/>
+                </Link>
+                <Link to="/CheckTickets">
+                    <CheckCircle size={32} />
+                </Link>
+            </div>
         </div>
-        <div className="links">
-            <Link to="/Login">
-                <User size={32}/>
-            </Link>
-            <Link to='/Home'>
-                <House size={32}/>
-            </Link>
-            <Link to="/CheckTickets">
-                <CheckCircle size={32} />
-            </Link>
-            {usuario}
-        </div>
-    </div>
-  );
+    );
 }

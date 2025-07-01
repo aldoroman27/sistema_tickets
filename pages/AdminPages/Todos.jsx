@@ -5,17 +5,22 @@ import './Todos.css'
 export const Todos = () => {
   const [allTickets, setTickets] = useState([]);
   const [mensaje, setMensaje] = useState('');
+  //Importamos de nuestras varibales ocultas
+  const consultar_send = import.meta.env.VITE_consultar_send;
 
   useEffect(() => {
     const obtenerallTickets = async () => {
+      //Intentamos obtner respuesta por parte de nuestro servidor
       try {
-        const response = await axios.get('http://localhost:5000/tickets');
+        //Obtenemos una respuesta haciendo una petición a nuestro URL
+        const response = await axios.get(consultar_send);
+        //Si es un conjunto de información, entonces lo almacenamos
         if (Array.isArray(response.data)) {
-          setTickets(response.data);
-        } else {
+          setTickets(response.data);//Almacenamos para obtner los tickets en una variable
+        } else {//En caso contrario, marcamos error
           setMensaje('❌ Error en el formato de los datos recibidos.');
         }
-      } catch (error) {
+      } catch (error) {//Si llegamos a tener error en algún momento de ejecución entonces mosrtramos el error.
         console.error(error);
         setMensaje('❌ Error al obtener tickets.');
       }

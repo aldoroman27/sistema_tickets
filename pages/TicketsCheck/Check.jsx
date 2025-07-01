@@ -2,6 +2,12 @@ import './Check.css';
 import { useNavigate } from 'react-router-dom';
 export const CheckTickets = () => {
   const navigate = useNavigate();
+
+  const handlerlogOut = () => {
+      localStorage.removeItem('usuario');
+      navigate('/');
+  };
+  
   return (
     <div className='admin-container'>
       <h2 className="titulo-admin">Panel de Administrador</h2>
@@ -27,7 +33,7 @@ export const CheckTickets = () => {
         <button className="btn btn-mostrarTodos" onClick={() => navigate('/Todo')}>
           Mostrar todos los tickets
         </button>
-        <button>
+        <button className='btn btn-cerrarSesion' onClick={handlerlogOut}>
           Cerrar Sesión
         </button>
       </div>

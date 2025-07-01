@@ -6,7 +6,7 @@ export const ModificarTicket = () => {
   const [idBuscar, setIdBuscar] = useState('');
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
-
+  const buscar_send = import.meta.env.VITE_buscar_send;
   const handleBuscar = async () => {
     if (!/^\d+$/.test(idBuscar)) {
       setMensaje('⚠️ Ingresa un ID numérico válido');
@@ -14,7 +14,7 @@ export const ModificarTicket = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/tickets/${idBuscar}`);
+      const response = await axios.get(`${buscar_send}/${idBuscar}`);
       setTicket(response.data);
       setMensaje('');
     } catch (error) {
@@ -43,7 +43,7 @@ export const ModificarTicket = () => {
         // Puedes incluir más campos si lo deseas
       };
 
-      await axios.put(`http://localhost:5000/tickets/${ticket.idTicket}`, datosModificados);
+      await axios.put(`${buscar_send}${ticket.idTicket}`, datosModificados);
       setMensaje('✅ Cambios guardados correctamente.');
       setTicket(null);
       setIdBuscar('');
