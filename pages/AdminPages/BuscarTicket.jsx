@@ -41,20 +41,20 @@ export const BuscarTicket = () => {
           value={idBuscar}
           onChange={(e) => setIdBuscar(e.target.value)}
         />
-        <button onClick={handleBuscar}>Buscar</button>
+        <button onClick={handleBuscar}>Buscar</button>{/*Invocamos al handler de nuestro botón Buscar que mandará el ID del ticket que estemos buscando*/}
       </div>
 
       {mensaje && <p className="mensaje">{mensaje}</p>}
 
       {ticket && (
         <div className="ticket-info">
-          <p><strong>ID Ticket:</strong> {ticket.idTicket}</p>
-          <p><strong>Empleado:</strong> {ticket.nombreCompleto}</p>
-          <p><strong>Departamento:</strong> {ticket.departamento}</p>
-          <p><strong>Equipo:</strong> {ticket.equipo}</p>
-          <p><strong>Descripción:</strong> {ticket.descripcion}</p>
-          <p><strong>Fecha:</strong> {ticket.fecha}</p>
-          <p><strong>Estado:</strong> {ticket.estado}</p>
+          <p><strong>ID Ticket:</strong> {ticket.idTicket}</p> {/*Mostramos el ID del ticket*/}
+          <p><strong>Empleado:</strong> {ticket.nombreCompleto}</p>{/*Mostramos el nombre del empleado*/}
+          <p><strong>Departamento:</strong> {ticket.departamento}</p>{/*Mostramos el departamento del usuario que levantó el ticket*/}
+          <p><strong>Equipo:</strong> {ticket.equipo}</p>{/*Mostramos el équipo que presenta falla*/}
+          <p><strong>Descripción:</strong> {ticket.descripcion}</p>{/*Mostramos la descripción del fallo o de la solicitud*/}
+          <p><strong>Fecha:</strong> {ticket.fecha}</p>{/*Mostramos la fecha en la que fue solicitada*/}
+          <p><strong>Estado:</strong> {ticket.estado}</p>{/*Mostramos el estado actual del ticket*/}
         </div>
       )}
     </div>

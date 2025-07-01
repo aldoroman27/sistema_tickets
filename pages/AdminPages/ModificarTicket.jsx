@@ -2,37 +2,43 @@ import './ModificarTicket.css';
 import { useState } from 'react';
 import axios from 'axios';
 
+//Definimos nuestro componente ModificarTicket
 export const ModificarTicket = () => {
   const [idBuscar, setIdBuscar] = useState('');
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
+  //Definimos nuestra ruta de petición al servidor para realizar las peticiones.
   const buscar_send = import.meta.env.VITE_buscar_send;
+  //Definimos nuestro handler para Buscar nuestro ticket
   const handleBuscar = async () => {
+    //Si es que no es un valor númerico entonces mostramos error
     if (!/^\d+$/.test(idBuscar)) {
-      setMensaje('⚠️ Ingresa un ID numérico válido');
-      return;
+      setMensaje('⚠️ Ingresa un ID numérico válido');//Deberá de ingresar un dato que sea númerico
+      return;//Retornamos
     }
-
+    //En caso de que sea un valor correcto pasamos al bloque de try y catch
     try {
+      //Hacemos la petición a nuestro servidor usando GET, la ruta y nuestro id a buscar.
       const response = await axios.get(`${buscar_send}/${idBuscar}`);
-      setTicket(response.data);
-      setMensaje('');
-    } catch (error) {
-      console.error(error);
-      setTicket(null);
-      if (error.response && error.response.status === 404) {
-        setMensaje('❌ Ticket no encontrado.');
+      //Con la información recuperada, lo guardamos para setear un nuevo ticket y poder trabajar con la información que nos dejó
+      setTicket(response.data);//Usamos estonces la información que nos da nuestra respuesta de la petición.
+      setMensaje('');//Seteamos nuestro mensaje.
+    } catch (error) {//En caso de caer en error
+      console.error(error);//Mostramos el error dentro de la consola
+      setTicket(null);//No seteamos nada nuestro seter de tickets
+      if (error.response && error.response.status === 404) {//Si hubo error por algunas de las dos condicionales entonces mostramos el mensaje
+        setMensaje('❌ Ticket no encontrado.');//Mostramos entonces el mensaje de error
       } else {
-        setMensaje('❌ Error al buscar el ticket.');
+        setMensaje('❌ Error al buscar el ticket.');//Mostramos error si la falla fue dentro del servidor.
       }
     }
   };
-
+  //Usamos el handler para el cambio y lo almacenamos en nuestro setter otra vez.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTicket(prev => ({ ...prev, [name]: value }));
   };
-
+  //Ahora declaramos nuestro handler para guardar la información que queremos mandar.
   const handleGuardar = async () => {
     try {
       const datosModificados = {
@@ -40,16 +46,19 @@ export const ModificarTicket = () => {
         departamento: ticket.departamento,
         equipo: ticket.equipo,
         descripcion: ticket.descripcion
-        // Puedes incluir más campos si lo deseas
+        // Se pueden incluir más campos, se deberá de modificar la esctructura de nuestro componente más abajo ->
       };
-
+      //Esperamos una respuesta de nuestro servidor con PUT y mandando los datosModificados junto con la petición.
       await axios.put(`${buscar_send}${ticket.idTicket}`, datosModificados);
+      //En caso de tener éxito le mostramos al usuario que tuvimos éxito realizando la operación.
       setMensaje('✅ Cambios guardados correctamente.');
+      //Limpiamos nuestro setter de nuestro ticket.
       setTicket(null);
+      //Limpiamos el id a buscar.
       setIdBuscar('');
-    } catch (error) {
-      console.error(error);
-      setMensaje('❌ Error al guardar los cambios.');
+    } catch (error) {//En caso de fallar entonces hacemos un catch del error.
+      console.error(error);//Mostramos el error ocurrido dentro de nuestra consola.
+      setMensaje('❌ Error al guardar los cambios.');//Mostramos el error en nuestro setter.
     }
   };
 

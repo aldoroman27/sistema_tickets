@@ -2,15 +2,18 @@ import './Resueltos.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
-
+//Comenzamos entonces con la estructura de nuestro componente de Resueltos.
 export const Resueltos = () => {
   const [ticketsCompletados, setTicketsCompletados] = useState([]);
   const [mensaje, setMensaje] = useState('');
+  //Importamos la ruta que necesitamos para hacer la petición a nuestro servidor.
   const completados_send = import.meta.env.VITE_completados_send;
 
   useEffect(() => {
+    //Declaramos nuestra función para obtner los tickets completados.
     const obtenerTicketsCompletados = async () => {
       try {
+        //Esperamos la respuesta de nuestra petición GET y la almacenamos en una variable.
         const response = await axios.get(completados_send);
         if (Array.isArray(response.data)) {
           setTicketsCompletados(response.data);

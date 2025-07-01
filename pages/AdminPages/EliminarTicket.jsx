@@ -52,6 +52,7 @@ export const EliminarTicket = () => {
       setTicketEncontrado(null);
       setIdBuscar('');
     } catch (error) {
+      //En caso de presentar error, lo mostramos con un mensaje y en consola.
       console.error(error);
       setMensaje('❌ Error al eliminar el ticket.');
     }
