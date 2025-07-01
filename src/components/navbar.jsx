@@ -12,7 +12,7 @@ export const NavBar = () => {
     if (!usuario) return null;
     return (
         <div className="navbar">
-            <div className="Logo">
+            <div className="Logo" title="MIDO GROUP">
                 <img src="/mido.png"/>
             </div>
             <div className="links" title="Iniciar Sesión">
