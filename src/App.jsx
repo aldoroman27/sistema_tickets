@@ -15,8 +15,7 @@ import { Home } from '../pages/Home/Home.jsx';//Importamos la ruta de Home (men�
 import { GuiaUso } from '../pages/GuiaUso/GuiaUso.jsx';//Importamos la ruta de nuestra Guía de uso.
 import { Todos } from '../pages/AdminPages/Todos.jsx';//Importamos la ruta del botón para mostrar todos los reportes (completados y pendientes)
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';//Importamos nuestro componente protected rute para gestionar la parte de los usuarios
-//Este import no recuerdo que hace XD
-
+import { ViewTicket } from '../pages/ViewTicket/ViewTicket.jsx';//Importamos nuestro componente para poder ver los tickets de usuario.
 function App() {
   const [usuario, setUsuario] = useState(() => {
      return JSON.parse(localStorage.getItem('usuario'));
@@ -51,6 +50,7 @@ function App() {
         <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />{/*User*/}
         <Route path="/GuiaUso" element={<ProtectedRoute><GuiaUso /></ProtectedRoute>} />{/*User*/}
         <Route path="/Todo" element={<ProtectedRoute onlyAdmin={true}><Todos /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/ViewTicket" element={<ProtectedRoute><ViewTicket /></ProtectedRoute>}/>{/*User*/}
       </Routes>
     </div>
   );

@@ -20,7 +20,7 @@ export const Tickets = () => {
   //Mensaje de registro éxitoso de nuestro ticket
   const [mensajeExito, setMensajeExito] = useState('');
   const[idGenerado, setIdGenerado] = useState(null);
-
+  const [errores, setErrores] = useState([]);
   useEffect(() => {
     // Genera la fecha actual automáticamente al cargar el componente
     const fechaActual = new Date().toISOString().split('T')[0]; // formato YYYY-MM-DD
@@ -29,7 +29,8 @@ export const Tickets = () => {
 
    const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setErrores([]);
+    setMensajeExito('');
     try {
       const response = await axios.post('http://localhost:5000/tickets', ticketData);
       console.log(response.data);
@@ -51,7 +52,16 @@ export const Tickets = () => {
         setMensajeExito('');
       }, 4000);
     } catch (error) {
-      console.error('Error al enviar ticket:', error);
+      if (error.response && error.response.status === 400) {
+        const data = error.response.data;
+      if (Array.isArray(data.errores)) {
+        setErrores(data.errores);
+      } else {
+        setErrores(['⚠️ Error de validación desconocido.']);
+      }
+      } else {
+        setErrores(['❌ Error al conectar con el servidor.']);
+      }
     }
   };
   const handleChange = (e) => {
@@ -163,6 +173,15 @@ export const Tickets = () => {
 
           <button type="submit">Enviar Ticket</button>
         </form>
+        {errores.length > 0 && (
+        <div className="errores">
+          <ul>
+            {errores.map((error, idx) => (
+              <li key={idx} className="error-item">❌ {error}</li>
+            ))}
+          </ul>
+        </div>
+        )}
       </div>
     </div>
   );

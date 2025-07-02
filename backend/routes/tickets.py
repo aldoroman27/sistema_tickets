@@ -1,18 +1,44 @@
 from flask import Blueprint, request, jsonify
 from db import get_connection
+import re
 
 #Bluepr
 ticket_bp = Blueprint('tickets',__name__)
+
+#Definimos una función para validar campos
+def validar_tickets(data):
+    errores = []
+
+    campos_requeridos = [
+        'idEmpleado', 'nombreCompleto', 'correoElectronico',
+        'departamento', 'equipo', 'descripcion', 'fecha'
+    ]
+    
+    for campo in campos_requeridos:
+        if not data.get(campo):
+            errores.append(f"Campo '{campo}' es obligatorio.")
+    
+    if data.get('correoElectronico') and not re.match(r"[^@]+@[^@]+\.[^@]+",data['correoElectronico']):
+        errores.append("Correo electronico ínvalido.")
+
+    if len(data.get('descripción', '')) < 5:
+        errores.append("La descripción debe de contener mínimo 5 caracteres.")
+    
+    return errores
 
 @ticket_bp.route('/tickets', methods=['POST'])
 #Definimos nustra función para crear tickets
 def crear_ticket():
     #Intentamos hacer la conexión con la base de datos
     try:
+        data = request.json
+        errores = validar_tickets(data)
+
+        if errores:
+            return jsonify({'errores': errores}), 400
+        
         conn = get_connection() #Hacemos conexión a la base de datos
         cursor = conn.cursor()#Esta variable lo que hará es almacenar cada columna como un diccionario, las llaves de cada objeto dentro son los nombres de las columnas de MYSQL
-        data = request.json
-
         #Añadimos la información haciendo uso de un qery de información SQL
         sql = """
             INSERT INTO tickets
@@ -202,3 +228,18 @@ def ticketsCompletados():
         if conn:
             conn.close()
         return jsonify({'message':str(e)}),500
+    
+#Definimos una nueva ruta para mostrar los tickets usando como guía el ID de los usuarios
+#Usamos entonces la ruta con el método get
+@ticket_bp.route('/tickets/usuario/<idEmpleado>', methods=['GET'])
+def obtener_tickets_usuario(idEmpleado):
+    try:
+        conn = get_connection()#Hacemos la conexión a la bd
+        cursor = conn.cursor(dictionary=True)#Creamos un cursor para hacer las consultas
+        cursor.execute("SELECT * FROM tickets WHERE idEmpleado = %s", (idEmpleado,))#Creamos la consulta y pasamos como parametro el idempleado
+        tickets = cursor.fetchall()#Obtenemos los resultados arrojados.
+        cursor.close()#Cerramos la consulta
+        conn.close()#Cerramos la conexión
+        return jsonify(tickets), 200#Mostramos que fue éxitosa la consulta
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500#En caso de fallar mostramos el error.
