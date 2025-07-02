@@ -15,8 +15,8 @@ export const Resueltos = () => {
       try {
         //Esperamos la respuesta de nuestra petición GET y la almacenamos en una variable.
         const response = await axios.get(completados_send);
-        if (Array.isArray(response.data)) {
-          setTicketsCompletados(response.data);
+        if (Array.isArray(response.data)) {//Si la respuesta que obtenemos es un array de datos entonces
+          setTicketsCompletados(response.data);//Almacenamos esa información.
         } else {
           setMensaje('❌ Error en el formato de los datos recibidos.');
         }

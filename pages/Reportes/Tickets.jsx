@@ -63,7 +63,7 @@ export const Tickets = () => {
       <div>
         <h1>Generar Ticket</h1>
         <h2 className='avisoImportante'>Aviso importante</h2>
-        <h3>Antes de generar un ticket, verifique que las conexiones sean correctas y haber reiniciado la computadora antes. Si el problema persiste genere el ticket.</h3>
+        <h3>Antes de generar un ticket, verifique que las conexiones del dispositivo sean correctas y haber reiniciado la computadora antes. Si el problema persiste entonces genere el ticket.</h3>
         {mensajeExito && (
         <div className="mensaje-exito">
             {mensajeExito}

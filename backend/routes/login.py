@@ -25,8 +25,8 @@ def login():
         conn.close()
 
         # Validar credenciales SIN hasheo
-        #if usuario and bcrypt.check_password_hash(usuario['password_hash'], password) #Implementar cuando tengamos hasheadas las pass
-        if usuario and usuario['password_hash'] == password:  # ← comparación directa
+        if usuario and bcrypt.check_password_hash(usuario['password_hash'], password): #Implementar cuando tengamos hasheadas las pass
+        #if usuario and usuario['password_hash'] == password:  # ← comparación directa
             return jsonify({
                 'id': usuario['id'],
                 'nombre': usuario['usuario'],

@@ -1,7 +1,23 @@
 import './Check.css';
 import { useNavigate } from 'react-router-dom';
-export const CheckTickets = () => {
+import { useEffect, useState } from 'react';
+
+  export const CheckTickets = () => {
   const navigate = useNavigate();
+  const [nombreUsuario, setNombreUsuario] = useState('');
+
+  useEffect(() => {
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (usuarioGuardado) {
+      try {
+        const usuario = JSON.parse(usuarioGuardado);
+        const primerNombre = usuario.nombre?.split(' ')[0] || '';
+        setNombreUsuario(primerNombre);
+      } catch (e) {
+        console.error('Usuario en localStorage no es válido:', e);
+      }
+    }
+  }, []);
 
   const handlerlogOut = () => {
       localStorage.removeItem('usuario');
@@ -10,9 +26,9 @@ export const CheckTickets = () => {
   
   return (
     <div className='admin-container'>
-      <h2 className="titulo-admin">Panel de Administrador</h2>
+      <h2 className="titulo-admin">Panel de Administrador{nombreUsuario && ` - Bienvenido, ${nombreUsuario}`}</h2>
       <div className="botones-admin">
-        <button className="btn-admin" onClick={() => navigate('/ConsultarTicket')}>
+        <button className="btn btn-admin" onClick={() => navigate('/ConsultarTicket')}>
           Consultar tickets pendientes
         </button>
         <button className="btn btn-liberar" onClick={() => navigate('/LiberarTicket')}>

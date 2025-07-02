@@ -8,6 +8,7 @@ export const Login = () => {
   const [contrasena, setContrasena] = useState('');
   const [mensaje, setMensaje] = useState('');
   const navigate = useNavigate();
+  //Importamos entonces nuestra ruta hacia nuestro servidor para manejar las peticiones.
   const login_send = import.meta.env.VITE_login_send;
 
   const handleSubmit = async (e) => {
@@ -15,7 +16,10 @@ export const Login = () => {
 
     //Mostramos mensaje en caso que no se introduzca nada o que haga falta algún dato
     if (!idEmpleado || !contrasena) {
-      setMensaje('⚠️ Ingresa todos los campos.');
+      setMensaje('⚠️ Ingresa todos los campos.');//Se muestra el mensaje del error
+      setTimeout(() => {
+        setMensaje('');
+      }, 4000);
       return;
     }
 
@@ -41,9 +45,15 @@ export const Login = () => {
       //Mostramos mensje en caso de error con el respectivo estatus del servidor, en caso de que sean credenciales incorrectas
       if (error.response && error.response.status === 401) {
         setMensaje('❌ Credenciales incorrectas, intente nuevamente.');
+        setTimeout(() => {
+          setMensaje('');
+        }, 4000);
       //Mostramos mensjae de error en caso que nuestro servidor no esté conectado
       } else {
         setMensaje('❌ Error al conectar con el servidor.');
+        setTimeout(() => {
+          setMensaje('');
+        }, 4000);
       }
     }
   };
