@@ -81,4 +81,3 @@ export const ConsultarTicket = () => {
 };
 
 export default ConsultarTicket;
-

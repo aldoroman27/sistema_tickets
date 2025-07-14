@@ -32,7 +32,17 @@ export const Tickets = () => {
     setErrores([]);
     setMensajeExito('');
     try {
-      const response = await axios.post('http://localhost:5000/tickets', ticketData);
+      const usuario = JSON.parse(localStorage.getItem('usuario'));
+      const token = usuario?.token;
+      const response = await axios.post(
+        'http://localhost:5000/tickets', 
+        ticketData,
+      {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+      }
+    );
       console.log(response.data);
       setIdGenerado(response.data.idTicket); // Si tu backend regresa el ID, puedes mostrarlo aquí
       setMensajeExito('✅ Ticket enviado correctamente');

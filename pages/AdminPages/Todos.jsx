@@ -12,8 +12,15 @@ export const Todos = () => {
     const obtenerallTickets = async () => {
       //Intentamos obtner respuesta por parte de nuestro servidor
       try {
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        const token = usuario?.token;
         //Obtenemos una respuesta haciendo una petición a nuestro URL
-        const response = await axios.get(consultar_send);
+        const response = await axios.get(consultar_send,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        }
+      );
         //Si es un conjunto de información, entonces lo almacenamos
         if (Array.isArray(response.data)) {
           setTickets(response.data);//Almacenamos para obtner los tickets en una variable

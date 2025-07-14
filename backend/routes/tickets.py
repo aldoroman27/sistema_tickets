@@ -82,7 +82,7 @@ def crear_ticket():
 
 #Definimos nuestra función para poder mostrar nuestro tickets, en este caso será para tickets pendientes.
 @ticket_bp.route('/tickets', methods=['GET'])
-
+#@token_required
 #Definimos nuestra función de obtner tickets
 def obtenerTickets():
     #Intentamos una conexión a la base de datos
@@ -100,6 +100,7 @@ def obtenerTickets():
 
 #Hacemos la petición a nuestra ruta dentro de nuestro servidor.
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['GET'])
+#@token_required
 #Definimos nuestra función para buscar nuestros tickets
 def buscarTicket(idTicket):
     try:
@@ -122,7 +123,7 @@ def buscarTicket(idTicket):
         return jsonify({'error':str(e)}),500 #Mostramos en caso de fallar error a la conexión del servidor.
 
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['DELETE'])
-#@token_required
+@token_required
 def eliminarTicket(idTicket):
     try:
         conn = get_connection()#Nos conectamos a la base de datos

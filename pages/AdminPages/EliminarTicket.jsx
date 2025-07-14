@@ -92,4 +92,3 @@ export const EliminarTicket = () => {
 };
 
 export default EliminarTicket;
-

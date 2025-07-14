@@ -53,6 +53,7 @@
 .btn-resueltos     { background-color: #16a085; }
 .btn-mostrarTodos  { background-color: #42279b; }
 .btn-cerrarSesion { background-color: #e16f63; }
+.btn-AgregarUsuario { background-color: #466da7; }
 
 /* Responsive: 1 columna en pantallas pequeñas */
 @media (max-width: 600px) {

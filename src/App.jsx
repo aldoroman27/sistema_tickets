@@ -53,7 +53,7 @@ function App() {
         <Route path="/GuiaUso" element={<ProtectedRoute><GuiaUso /></ProtectedRoute>} />{/*User*/}
         <Route path="/Todo" element={<ProtectedRoute onlyAdmin={true}><Todos /></ProtectedRoute>} />{/*Admin*/}
         <Route path="/ViewTicket" element={<ProtectedRoute><ViewTicket /></ProtectedRoute>}/>{/*User*/}
-        <Route path="/AgregarUsuario" element={<AgregarUsuario/>}/>
+        <Route path="/AgregarUsuario" element={<ProtectedRoute><AgregarUsuario/></ProtectedRoute>}/>
       </Routes>
     </div>
   );
