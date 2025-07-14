@@ -13,8 +13,19 @@ export const Resueltos = () => {
     //Declaramos nuestra función para obtner los tickets completados.
     const obtenerTicketsCompletados = async () => {
       try {
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        const token = usuario?.token;
+
+        if(!token){
+          console.warn('No hay token guardado');
+          return;
+        }
         //Esperamos la respuesta de nuestra petición GET y la almacenamos en una variable.
-        const response = await axios.get(completados_send);
+        const response = await axios.get(completados_send,{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        });
         if (Array.isArray(response.data)) {//Si la respuesta que obtenemos es un array de datos entonces
           setTicketsCompletados(response.data);//Almacenamos esa información.
         } else {

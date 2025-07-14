@@ -12,8 +12,19 @@ export const ConsultarTicket = () => {
     //Declaramos nuestra función fetchTickets para obtener el resultado de nuestra petición
     const fetchTickets = async () => {
       try {
+        const usuario = JSON.parse(localStorage.getItem('usuario'));
+        const token = usuario?.token;
+
+        if(!token){
+          console.warn('No hay token guardado');
+          return;
+        }
         //Usamos axios para obtener una petición get a nuestro servidor
-        const response = await axios.get(consultar_send);
+        const response = await axios.get(consultar_send,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         //Filtramos si el ticket está en pendiente
         const pendientes = response.data.filter(ticket => ticket.estado === 'pendiente');
         //Seteamos el ticket y lo pasamos como parametro

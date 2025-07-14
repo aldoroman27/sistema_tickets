@@ -6,6 +6,8 @@ from routes.registro import registro_bp
 app = Flask(__name__)
 CORS(app)
 
+app.config['SECRET_KEY'] = 'mido_clave123#'
+
 @app.route('/')
 def index():
     return 'Workin´good'
