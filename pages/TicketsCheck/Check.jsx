@@ -52,6 +52,9 @@ import { useEffect, useState } from 'react';
         <button className='btn btn-cerrarSesion' onClick={handlerlogOut}>
           Cerrar Sesión
         </button>
+        <button className='btn btn-AgregarUsuario' onClick={() => navigate('/AgregarUsuario')}>
+          Agregar Usuario
+        </button>
       </div>
     </div>
   );

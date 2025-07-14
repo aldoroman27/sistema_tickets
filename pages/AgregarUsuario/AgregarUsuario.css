@@ -1,0 +1,34 @@
+.registro-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.registro-container input[type="text"],
+.registro-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.registro-container button {
+  padding: 10px 20px;
+  background-color: #2980b9;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.registro-container .mensaje {
+  margin-top: 15px;
+  color: #2c3e50;
+  font-weight: bold;
+}

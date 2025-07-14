@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from db import get_connection
 import re
+from utils.token_required import token_required
 
 #Bluepr
 ticket_bp = Blueprint('tickets',__name__)
@@ -26,7 +27,9 @@ def validar_tickets(data):
     
     return errores
 
+#Definimos la ruta que debremos de tener, además del método que vamos a utilizar dentro.
 @ticket_bp.route('/tickets', methods=['POST'])
+#@token_required#Indicamos que se necesite un inicio de sesión para poder crear tickets y así evitamos usos mal intencionados de nuestro programa
 #Definimos nustra función para crear tickets
 def crear_ticket():
     #Intentamos hacer la conexión con la base de datos
@@ -79,6 +82,7 @@ def crear_ticket():
 
 #Definimos nuestra función para poder mostrar nuestro tickets, en este caso será para tickets pendientes.
 @ticket_bp.route('/tickets', methods=['GET'])
+
 #Definimos nuestra función de obtner tickets
 def obtenerTickets():
     #Intentamos una conexión a la base de datos
@@ -118,6 +122,7 @@ def buscarTicket(idTicket):
         return jsonify({'error':str(e)}),500 #Mostramos en caso de fallar error a la conexión del servidor.
 
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['DELETE'])
+#@token_required
 def eliminarTicket(idTicket):
     try:
         conn = get_connection()#Nos conectamos a la base de datos
@@ -143,6 +148,7 @@ def eliminarTicket(idTicket):
 
 #Indicamos la ruta que vamos a seguir además de la búsqueda de un ticket y el método que vamos a utilizar.
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['PUT'])
+#@token_required
 def modificarTicket(idTicket):
     try:
         conn = get_connection() #Hacemos la conexión a la base de datos
