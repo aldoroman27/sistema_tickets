@@ -28,7 +28,8 @@ def registrar_usuario():#Definimos nuestra función para registrar al usuario
             VALUES (%s,%s,%s,%s)
             """
             #Ejecutamos entonces el qery y le pasamos los valores que necesitamos
-            cursor.execute(sql,(id_usuario,nombre_usuario,contrasena,admin))
+            contrasena_hasheada = bcrypt.generate_password_hash(contrasena).decode('utf-8')
+            cursor.execute(sql,(id_usuario,nombre_usuario,contrasena_hasheada,admin))
             conn.commit()#Hacemos un commit a nuestra base de datos
             conn.close()#Cerramos la conexión a la base de datos
             #En caso de éxito regresamos el respectivo mensaje indicandolo

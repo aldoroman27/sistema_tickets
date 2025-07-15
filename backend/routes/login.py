@@ -1,3 +1,4 @@
+"""
 from flask import Flask,Blueprint, request, jsonify #Importamos nuestra biblioteca de Flask para levantar un pequeño servidor de nuestra app
 from db import get_connection #Importamos nuestro archivo de db e importamos el método de get_connection para la base de datos
 from flask_bcrypt import Bcrypt #Importamos Bcrypt para la desencriptación de las contraseñas.
@@ -47,3 +48,4 @@ def login():#Definimos nuestra función de login para poder validar la informaci
     except Exception as e:#En caso de fallar la conexión con el servidor entonces 
         #Retornamos errror de conexión con el servidor 
         return jsonify({'error': str(e)}), 500
+"""

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from routes.tickets import ticket_bp
-from routes.login import auth_bp
+from routes.login_mongo import auth_bp
 from routes.registro import registro_bp
 app = Flask(__name__)
 CORS(app)

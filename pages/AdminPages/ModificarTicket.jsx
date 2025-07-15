@@ -52,6 +52,7 @@ export const ModificarTicket = () => {
       await axios.put(`${buscar_send}/${ticket.idTicket}`, datosModificados);
       //En caso de tener éxito le mostramos al usuario que tuvimos éxito realizando la operación.
       setMensaje('✅ Cambios guardados correctamente.');
+      console.log('Cambios guardados correctamente');
       //Limpiamos nuestro setter de nuestro ticket.
       setTicket(null);
       //Limpiamos el id a buscar.
