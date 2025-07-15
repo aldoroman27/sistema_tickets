@@ -47,7 +47,7 @@ export const EliminarTicket = () => {
   const handleEliminar = async () => {
     try {
       //Esperamos la respuesta de nuestro servidor para la petición de eliminar
-      await axios.delete(`${buscar_send}${ticketEncontrado.idTicket}`);
+      await axios.delete(`${buscar_send}/${ticketEncontrado.idTicket}`);
       setMensaje('✅ Ticket eliminado correctamente.');//Mostramos mensaje en caso de que sea éxitoso la eliminación
       setTicketEncontrado(null);
       setIdBuscar('');

@@ -49,7 +49,7 @@ export const ModificarTicket = () => {
         // Se pueden incluir más campos, se deberá de modificar la esctructura de nuestro componente más abajo ->
       };
       //Esperamos una respuesta de nuestro servidor con PUT y mandando los datosModificados junto con la petición.
-      await axios.put(`${buscar_send}${ticket.idTicket}`, datosModificados);
+      await axios.put(`${buscar_send}/${ticket.idTicket}`, datosModificados);
       //En caso de tener éxito le mostramos al usuario que tuvimos éxito realizando la operación.
       setMensaje('✅ Cambios guardados correctamente.');
       //Limpiamos nuestro setter de nuestro ticket.

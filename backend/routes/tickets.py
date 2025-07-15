@@ -22,7 +22,7 @@ def validar_tickets(data):
     if data.get('correoElectronico') and not re.match(r"[^@]+@[^@]+\.[^@]+",data['correoElectronico']):
         errores.append("Correo electronico ínvalido.")
 
-    if len(data.get('descripción', '')) < 5:
+    if len(data.get('descripcion', '')) < 5:
         errores.append("La descripción debe de contener mínimo 5 caracteres.")
     
     return errores
@@ -123,7 +123,7 @@ def buscarTicket(idTicket):
         return jsonify({'error':str(e)}),500 #Mostramos en caso de fallar error a la conexión del servidor.
 
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['DELETE'])
-@token_required
+#@token_required
 def eliminarTicket(idTicket):
     try:
         conn = get_connection()#Nos conectamos a la base de datos

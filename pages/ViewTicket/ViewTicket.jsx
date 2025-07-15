@@ -14,7 +14,7 @@ export const ViewTicket = () => {
         const usuario = JSON.parse(usuarioGuardado);//Guardamos el usuario
         const id = usuario.id;//Obtenemos entonces el id del usuario para poder trabajar con ella.
         setIdUsuario(id);//Seteamos entonces la información de nuestro usuario usando entonces el setter.
-
+        console.log('Contenido de localstorage:', localStorage.getItem('usuario'));
         // Obtenemos los tickets de nuestro backend usando el id de nuestro usuario
         axios.get(`http://localhost:5000/tickets/usuario/${id}`)
           .then((response) => {
@@ -46,8 +46,8 @@ export const ViewTicket = () => {
         <table className="tabla-tickets">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombre</th>
+              <th>ID Ticket</th>
+              <th>Nombre-Solicitante</th>
               <th>Departamento</th>
               <th>Equipo</th>
               <th>Descripción</th>

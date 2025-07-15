@@ -38,7 +38,8 @@ def login():#Definimos nuestra función de login para poder validar la informaci
             return jsonify({ #Retornamos en un formato json
                 'token': token,#El id de nuestro usuario
                 'nombre': usuario['usuario'],# El nombre de nuestro usuario
-                'admin': usuario['admin']# El tipo de usuario admin o no admin
+                'admin': usuario['admin'],
+                'id': usuario['id']# El tipo de usuario admin o no admin
             }), 200 #Retornamos el código de éxito de nuestro servidor
         else:#En caso de que no sean las credenciales correctas entonces
             #Indicamos el mensaje de error y además retornamos un mensaje de error en el servidor que sería el 401
