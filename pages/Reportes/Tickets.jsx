@@ -35,7 +35,7 @@ export const Tickets = () => {
       const usuario = JSON.parse(localStorage.getItem('usuario'));
       const token = usuario?.token;
       const response = await axios.post(
-        'http://localhost:5000/tickets_mongo', 
+        'http://localhost:5000/tickets_agregar', 
         ticketData,
       {
         headers: {

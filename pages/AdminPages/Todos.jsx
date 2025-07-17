@@ -6,7 +6,7 @@ export const Todos = () => {
   const [allTickets, setTickets] = useState([]);
   const [mensaje, setMensaje] = useState('');
   //Importamos de nuestras varibales ocultas
-  const consultar_send = import.meta.env.VITE_consultar_send;
+  const todos_send = import.meta.env.VITE_todos_send;
 
   useEffect(() => {
     const obtenerallTickets = async () => {
@@ -15,7 +15,7 @@ export const Todos = () => {
         const usuario = JSON.parse(localStorage.getItem('usuario'));
         const token = usuario?.token;
         //Obtenemos una respuesta haciendo una petición a nuestro URL
-        const response = await axios.get(consultar_send,{
+        const response = await axios.get(todos_send,{
           headers:{
             Authorization:`Bearer ${token}`
           }

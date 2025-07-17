@@ -8,6 +8,7 @@ export const EliminarTicket = () => {
   const [mensaje, setMensaje] = useState('');
   //Importamos la ruta directamente de nuestro file protected, donde tenemos las rutas definidas.
   const buscar_send = import.meta.env.VITE_buscar_send;
+  const eliminar_send = import.meta.env.VITE_eliminar_send;
   //Creamos nuestro handler para buscar la información.
   const handleBuscar = async () => {
     //En caso de no ingresar nada, entonces mostramos un mensaje de advertencia
@@ -47,7 +48,9 @@ export const EliminarTicket = () => {
   const handleEliminar = async () => {
     try {
       //Esperamos la respuesta de nuestro servidor para la petición de eliminar
-      await axios.delete(`${buscar_send}/${ticketEncontrado.idTicket}`);
+      const url = `${eliminar_send}/${ticketEncontrado.idTicket}`;
+      const response = await axios.delete(url);
+      console.log("Respuesta de la eliminación: ", response);
       setMensaje('✅ Ticket eliminado correctamente.');//Mostramos mensaje en caso de que sea éxitoso la eliminación
       setTicketEncontrado(null);
       setIdBuscar('');

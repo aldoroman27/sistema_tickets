@@ -9,6 +9,7 @@ export const ModificarTicket = () => {
   const [mensaje, setMensaje] = useState('');
   //Definimos nuestra ruta de petición al servidor para realizar las peticiones.
   const buscar_send = import.meta.env.VITE_buscar_send;
+  const modificar_send = import.meta.env.VITE_modificar_send;
   //Definimos nuestro handler para Buscar nuestro ticket
   const handleBuscar = async () => {
     //Si es que no es un valor númerico entonces mostramos error
@@ -49,7 +50,7 @@ export const ModificarTicket = () => {
         // Se pueden incluir más campos, se deberá de modificar la esctructura de nuestro componente más abajo ->
       };
       //Esperamos una respuesta de nuestro servidor con PUT y mandando los datosModificados junto con la petición.
-      await axios.put(`${buscar_send}/${ticket.idTicket}`, datosModificados);
+      await axios.put(`${modificar_send}/${ticket.idTicket}`, datosModificados);
       //En caso de tener éxito le mostramos al usuario que tuvimos éxito realizando la operación.
       setMensaje('✅ Cambios guardados correctamente.');
       console.log('Cambios guardados correctamente');

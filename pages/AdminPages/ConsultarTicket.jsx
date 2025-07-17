@@ -69,10 +69,10 @@ export const ConsultarTicket = () => {
             </thead>
             <tbody>
               {tickets.map(ticket => (
-                <tr key={ticket.id}>
+                <tr key={ticket.idTicket}>
                   <td>{ticket.idTicket}</td>
                   <td>{ticket.nombreCompleto}</td>
-                  <td>{ticket.id}</td>
+                  <td>{ticket.idEmpleado}</td>
                   <td>{ticket.departamento}</td>
                   <td>{ticket.equipo}</td>
                   <td>{ticket.descripcion}</td>

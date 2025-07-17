@@ -9,6 +9,7 @@ export const ViewTicket = () => {
   //Vamos a cargar al usuario para poder trabajar con su información
   useEffect(() => {
     const usuarioGuardado = localStorage.getItem('usuario');//Obtenemos al usuario
+    const send_mistickets = import.meta.env.VITE_mistickets_send;
     if (usuarioGuardado) {//En caso de que se guardara correctamente ejecutamos el siguiente bloque de instrucciones
       try {
         const usuario = JSON.parse(usuarioGuardado);//Guardamos el usuario
@@ -16,7 +17,7 @@ export const ViewTicket = () => {
         setIdUsuario(id);//Seteamos entonces la información de nuestro usuario usando entonces el setter.
         console.log('Contenido de localstorage:', localStorage.getItem('usuario'));
         // Obtenemos los tickets de nuestro backend usando el id de nuestro usuario
-        axios.get(`http://localhost:5000/tickets/usuario/${id}`)
+        axios.get(`${send_mistickets}/${id}`)
           .then((response) => {
             setTickets(response.data);//Almacenamos la información de nuestra petición.
             setCargando(false);
