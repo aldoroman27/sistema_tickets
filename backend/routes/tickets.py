@@ -80,23 +80,7 @@ def crear_ticket():
             conn.close()
         return jsonify({'error':str(e)}),500 #Mostramos el código 500 que significa error en el servidor.
 
-#Definimos nuestra función para poder mostrar nuestro tickets, en este caso será para tickets pendientes.
-@ticket_bp.route('/tickets', methods=['GET'])
-#@token_required
-#Definimos nuestra función de obtner tickets
-def obtenerTickets():
-    #Intentamos una conexión a la base de datos
-    try:
-        conn = get_connection()
-        cursor = conn.cursor(dictionary=True) #Antes False
-        cursor.execute("SELECT * FROM tickets")#Hacemos la consulta en SQL
-        tickets = cursor.fetchall()#Obtenemos toda la información
-        cursor.close()
-        return jsonify(tickets)#Retornamos un formato en JSON de los tickets que tenemos disponibles
-    except Exception as e:#Lanzamos una exception en caso de fallar
-        if conn:
-            conn.close()
-        return jsonify({"error":str(e)}),500 #Mostramos un mensaje de erro además de mostrar error en el servidor.
+#Definimos nuestra función para poder mostrar nuestro tickets en general.
 
 #Hacemos la petición a nuestra ruta dentro de nuestro servidor.
 @ticket_bp.route('/tickets/<int:idTicket>', methods=['GET'])

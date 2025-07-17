@@ -4,9 +4,9 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import re
 from datetime import datetime
-
+import os
 #Importamos de nuestro archivo login_mongo nuestra key a la db
-from .login_mongo import MONGO_URI
+
 
 #Declaramos nuestro blueprint
 tickets_mongo_bp = Blueprint('tickets_mongo',__name__)
@@ -14,7 +14,7 @@ tickets_mongo_bp = Blueprint('tickets_mongo',__name__)
 CORS(tickets_mongo_bp)
 
 #Hacemos la conexión a la base de datos ubicada en mongo
-client = MongoClient(MONGO_URI)#Llamamos nuestra key para la conn
+client = MongoClient(os.getenv("MONGO_URI"))#Llamamos nuestra key para la conn
 db = client['pruebas_mido']#Seleccionamos el nombre de la db
 coleccion_tickets = db['tickets']#Seleccionamos el nombre de la colección con la que vamos a trabajar
 

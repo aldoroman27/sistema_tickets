@@ -14,7 +14,7 @@ CORS(auth_bp)
 
 SECRET_KEY = 'mido_clave123#'
 
-MONGO_URI = "mongodb+srv://itsupport:QovEnvcNmQRGpH5k@testit.ke5qee0.mongodb.net/"
+MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)
 db = client['pruebas_mido'] #Nombre de la base de datos
 coleccion_usuarios = db['usuarios'] #Colección de datos que vamos a obtener

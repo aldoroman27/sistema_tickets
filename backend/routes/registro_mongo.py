@@ -2,12 +2,11 @@ from flask import request, jsonify, Blueprint
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 from routes.login_mongo import MONGO_URI
-
+import os
 
 bcrypt = Bcrypt()
 registromongo_bp = Blueprint('registro_mongo',__name__)
-
-client = MongoClient(MONGO_URI)
+client = MongoClient(os.getenv("MONGO_URI"))
 db = client['pruebas_mido'] #Nombre de la base de datos
 coleccion_usuarios = db['usuarios'] #Colección de datos que vamos a obtener
 
