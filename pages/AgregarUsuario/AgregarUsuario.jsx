@@ -8,16 +8,16 @@ export const AgregarUsuario = () => {
   const [contrasena, setContrasena] = useState('');
   const [admin, setAdmin] = useState(false);
   const [mensaje, setMensaje] = useState('');
-
+  const send_registrar = import.meta.env.VITE_registrar_send;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/registro', {
-        id,
-        usuario,
-        contrasena,
-        admin,
+      const response = await axios.post(`http://localhost:5000/registrar_usuario`, {
+        idEmpleado:id,
+        nombreCompleto: usuario,
+        password:contrasena,
+        admin: admin,
       });
 
       setMensaje(response.data.message || '✅ Usuario registrado correctamente');

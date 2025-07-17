@@ -8,6 +8,8 @@ from routes.registro import registro_bp
 #Rutas de acceso para nuestra db en nube MongoDB w Atlas, implementar también en axios para el buen funcionamiento.
 from routes.tickets_mongo import tickets_mongo_bp
 from routes.login_mongo import auth_bp
+from routes.registro_mongo import registromongo_bp
+
 app = Flask(__name__)
 CORS(app)
 
@@ -23,6 +25,7 @@ def index():
 app.register_blueprint(auth_bp)
 #app.register_blueprint(registro_bp) #QUITAR ESTE DESPUES DEL TEST
 app.register_blueprint(tickets_mongo_bp)
+app.register_blueprint(registromongo_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
