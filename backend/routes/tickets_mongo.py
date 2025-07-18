@@ -42,16 +42,16 @@ def validar_tickets(data):
 
 #Declaramos una función para poder obtener el id de cada ticket registrado
 def get_next_ticket_id():
-    counter = db.counters.find_one_and_update(
-        {"_id": "ticketid"},
-        {"$inc": {"sequence_value": 1}},
+    counter = db.counters.find_one_and_update( #Este es el proceso de actualizar el id cada vez que se registre uno
+        {"_id": "ticketid"},#Tomamos el valor del id
+        {"$inc": {"sequence_value": 1}},#Aumentamos el valor a +1 cada que se registre uno nuevo
         upsert=True,  #crea el documento si no existe
-        return_document=True
+        return_document=True #Regresa el documento
     )
-    if counter and 'sequence_value' in counter:
-        return counter['sequence_value']
-    else:
-        raise Exception("No se pudo obtener el id del ticket.")
+    if counter and 'sequence_value' in counter:#Si tenemos éxito al ejecutarlo el update
+        return counter['sequence_value']#Retornamos el valor del contador que sube a +1
+    else:#En caso de poder hacerlo entonces
+        raise Exception("No se pudo obtener el id del ticket.")#Mostramos entonces el mensaje de error que no se pudo recuperar el id del ticekt
 
 
 #Esta es nuestra ruta para poder agregar tickets
@@ -185,38 +185,47 @@ def mostrartodosTickets():
             ticket['mongoID'] = str(ticket['_id'])
             del ticket['_id']#Eliminamos para evitar problemas de compatibilidad.
             #Nos aseguramos que se incluya el id del ticket
-            if 'idTicket' not in ticket:
+            if 'idTicket' not in ticket:#Si no se encuentra un id en el ticket, entonces será imprimido como N/A
                 ticket['idTicket'] = "N/A"
 
             tickets.append(ticket)#Agregamos el ticket que encontramos a la lista
         print(f"Total de tickets encontrados: {len(tickets)}")#Mostramos todos los tickets que tenemos en nuestra lista
         return jsonify(tickets),200 #Retornamos los valores con éxito si es que encontramos tickets existentes
-    except Exception as e:
+    except Exception as e:#En caso de caer en error entonces:
+        #Mostramos el respectivo mensaje de error en consola, además del mensaje que arrojó
+        print(f"Error durante el proceso de mostrar tickets: {str(e)}")
+        #Retornamos en formato json el mensaje del error seguido del código del error que tenemos.
         return jsonify({'message'}),500
     
 #Definimos nuestra función para poder modificar los tickets.
 @tickets_mongo_bp.route('/tickets_modificar/<int:id_ticket>',methods=['PUT'])
-def modificarTickets(id_ticket):
+def modificarTickets(id_ticket):#Definimos entonces nuestra función para modificar los tickets con un parametro que será el id del ticket
     try:
-        datos = request.get_json()
-        campos_a_actualizar = {}
-
+        datos = request.get_json()#Obtenemos la información mediante un get_json()
+        campos_a_actualizar = {} #definimos un diccionario para para actualizar la información correctamente
+        #Hacemos un recorrido de los posibles campos a modificar
         for campo in ['nombreCompleto', 'correoElectronico', 'departamento', 'equipo', 'descripcion']:
-            if campo in datos:
-                campos_a_actualizar[campo] = datos[campo]
-        if not campos_a_actualizar:
+            if campo in datos:#Si uno de los campos a modificar se encuentra dentro de nuestros datos que nos llegan
+                campos_a_actualizar[campo] = datos[campo]#Lo mandamos a nuestra variable de datos
+        if not campos_a_actualizar:#Si no nos llega nada de información, entonces
+            #Retornamos un mensaje de que no se proporcionaron datos para modificar
             return jsonify({'message':'No se proporcionaron datos para modificar'}),400
-        
-        resultado = coleccion_tickets.update_one(
-            {'idTicket': id_ticket},
-            {'$set': campos_a_actualizar}
+        #Si no fue el caso entonces actualizamos nuestra tabla-colección de datos de nuestra base de datos
+        resultado = coleccion_tickets.update_one(#Usamos el método update_one
+            {'idTicket': id_ticket},#Seteamos el id que nos llegó
+            {'$set': campos_a_actualizar}#Finalmente la inserción de los datos que nos llegó
         )
+        #Si el resultado de buscar ese id del ticket no se encuentra en toda la colección
         if resultado.matched_count == 0:
+            #Retornamos entonces un mensaje de error y además el respectivo error en el servidor
             return jsonify({'message':'No se encontró un ticket con ese ID'}),404
         else:
+            #En caso contrario, mostraremos el mensaje de éxito en la modificación y además el mensaje de éxito en el servidor.
             return jsonify({'message':'Ticket modificado correctamente'}),200
-    except Exception as e:
+    except Exception as e:#En caso de que fallemos entonces:
+        #Mostraremos en consola el error al actualizar seguido del error que se recuperó
         print(f"Error al actualizar el ticket: {str(e)}")
+        #Mostramos un mensaje de error y además mostramos el código de error en el servidor.
         return jsonify({'message':str(e)}),500
     
 #Definimos una nueva ruta para que el usuario vea el status de sus tickets
@@ -239,6 +248,8 @@ def misTickets(id):
             tickets.append(ticket)#Agregamos el ticekt que encontramos a la lista
         print(f"Total de tickets encontrados: {len(tickets)}")#Mostramos todos los tickets que tenemos en nuestra lista
         return jsonify(tickets),200 #Retornamos los valores con éxito si es que encontramos tickets existentes
-    except Exception as e:
+    except Exception as e:#En caso de caer en error entonces
+        #Mostramos en consola el mensaje de error
         print(f"Error durante el proceso {str(e)}")
-        return jsonify({'message':str(e)})
+        #Retornamos un mensaje con el error y además el código de error que el servidor regresa.
+        return jsonify({'message':str(e)}),500

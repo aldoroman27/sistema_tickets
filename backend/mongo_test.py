@@ -1,12 +1,6 @@
-from flask import Flask, jsonify
-from pymongo import MongoClient
-from routes.tickets_mongo import get_next_id_ticket
-app = Flask(__name__)
+from flask_bcrypt import Bcrypt
 
-MONGO_URI = "mongodb+srv://itsupport:QovEnvcNmQRGpH5k@testit.ke5qee0.mongodb.net/"
+bcrypt = Bcrypt()
 
-
-#Hacemos la prueba de conexión.
-client = MongoClient(MONGO_URI)
-db = client['pruebas_mido']
-coleccion = db['tickets']
+nuevo_hash = bcrypt.generate_password_hash("vakita123").decode('utf-8')
+print(nuevo_hash)

@@ -9,10 +9,10 @@ export const Login = () => {
   const [mensaje, setMensaje] = useState('');
   const navigate = useNavigate();
   //Importamos entonces nuestra ruta hacia nuestro servidor para manejar las peticiones.
-  //const login_send = import.meta.env.VITE_login_send;
+  const login_send = import.meta.env.VITE_login_send;
 
   //Vamos a importar el nuevo url para las peticiones de nuestra aplicación
-  const url = `${process.env.REACT_APP_API_URL}/login`
+  const url = `${login_send}`
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ export const Login = () => {
       }, 4000);
       return;
     }
+    axios.defaults.withCredentials = true;
 
     //Hacemos la petición a nuestra ruta. Deberá de cambiarse a un archivo .env
     try {
