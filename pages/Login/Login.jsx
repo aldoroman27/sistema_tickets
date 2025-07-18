@@ -32,7 +32,14 @@ export const Login = () => {
       const response = await axios.post(url, {
         id: idEmpleado,
         contrasena: contrasena
-      });
+      },
+      {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+        withCredentials: true
+      }
+    );
 
       // Guardamos los datos del usuario en localStorage, podmeos usar context si es que se requiere
       localStorage.setItem('usuario', JSON.stringify(response.data));
