@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 export const Tickets = () => {
-
+  const registrar_send = import.meta.env.VITE_registrarTicket_send;
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
   const [ticketData, setTicketData] = useState({
     idTicket: '',
@@ -35,7 +35,7 @@ export const Tickets = () => {
       const usuario = JSON.parse(localStorage.getItem('usuario'));
       const token = usuario?.token;
       const response = await axios.post(
-        'http://localhost:5000/tickets_agregar', 
+        registrar_send, 
         ticketData,
       {
         headers: {
@@ -44,10 +44,10 @@ export const Tickets = () => {
       }
     );
       console.log(response.data);
+      console.log('Ticket generado',ticketData);
       setIdGenerado(response.data.idTicket); // Si tu backend regresa el ID, puedes mostrarlo aquí
       setMensajeExito('✅ Ticket enviado correctamente');
       setIdGenerado(response.data.idTicket);
-
       setTicketData(prev => ({
         idEmpleado: '',
         nombreCompleto: '',

@@ -30,7 +30,7 @@ export const Login = () => {
     //Hacemos la petición a nuestra ruta. Deberá de cambiarse a un archivo .env
     try {
       const response = await axios.post(url, {
-        id: idEmpleado,
+        idEmpleado: idEmpleado,
         contrasena: contrasena
       },
       {
@@ -40,6 +40,7 @@ export const Login = () => {
         withCredentials: true
       }
     );
+    console.log(response.data)
 
       // Guardamos los datos del usuario en localStorage, podmeos usar context si es que se requiere
       localStorage.setItem('usuario', JSON.stringify(response.data));

@@ -117,7 +117,7 @@ def obtener_tickets():
         print("Erro al obtner los tickets: ",e)#Mostramos error al obtener los tickets e imprimimos el error
         return jsonify({'message':str(e)})#Mostramos el error
     
-#Esta ruta será la encarga de modificar los tickets como completados, tomando como parametro el ID del ticket que deseamos modificar.
+#Esta ruta será la encarga de buscar los tickets, tomando como parametro el ID del ticket.
 @tickets_mongo_bp.route('/tickets/<int:id_ticket>', methods=['GET'])
 def buscarTicket(id_ticket):
     try:
@@ -129,7 +129,25 @@ def buscarTicket(id_ticket):
         return jsonify(ticket),200# Retornamos el ticket que encontramos
     except Exception as e:#En caso de fallar en el proceso mostramos el mensaje correspondiente
         return jsonify({'error':str(e)}),500 #Mostramos el respectivo mensaje de error
-    
+
+#Definimos una nueva ruta para poder modificar los tickets y marcarlos como completados
+@tickets_mongo_bp.route('/tickets_completar/<int:id_ticket>', methods=['PUT'])
+def marcarCompletado(id_ticket):#Definimos nuestra función y usamos como parametro el id_ticket
+    try:
+        #Actualizamos el estado del ticket
+        resultado = coleccion_tickets.update_one(
+            {'idTicket':id_ticket},
+            {'$set':{'estado':'completado'}}
+        )
+        #En caso de que no se encuentre ningún ticket con ese ID dentro de nuestra db, entonces mostramos error
+        if resultado.matched_count == 0:
+            return jsonify({'message':'No se encontó ningún ticket con ese ID'}),404
+        #En caso de encontrar un ticket con ese id mostraremos mensaje de éxito.
+        return jsonify({'message':'Ticket completado correctamente.'}),200
+    except Exception as e:
+        #En caso de tener error con el servidor, marcamos el error.
+        return jsonify({'message':'Error al conectar con el servidor'}),500
+
 #Definimos la nueva ruta para eliminar los tickets usando entonces el id que ya pasamos como parametro.
 @tickets_mongo_bp.route('/ticket_delete/<int:id_ticket>', methods=['DELETE'])
 def eliminarTicket(id_ticket):

@@ -8,6 +8,7 @@ export const LiberarTicket = () => {
   const [ticketEncontrado, setTicketEncontrado] = useState(null);
   const [mensaje, setMensaje] = useState('');
   //Definimos nuestra ruta para acceder a ella más adelante.
+  const liberar_send = import.meta.env.VITE_liberar_send;
   const buscar_send = import.meta.env.VITE_buscar_send;
   const handleBuscar = async () => {
     //Si es que la entrada es una cadena vacía, entonces solicitamos que se ingresen los datos
@@ -52,7 +53,7 @@ export const LiberarTicket = () => {
   const handleLiberar = async () => {
     try {
       //Esperamos una respuesta de nuestra petición PUT
-      await axios.put(`${buscar_send}${ticketEncontrado.idTicket}`, {
+      await axios.put(`${liberar_send}/${ticketEncontrado.idTicket}`, {
         estado: 'completado'//Cambiamos el estado a completado
       });
       //Mostramos mensaje de que el ticket fue liberado correctamente

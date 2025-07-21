@@ -9,18 +9,20 @@ export const AgregarUsuario = () => {
   const [admin, setAdmin] = useState(false);
   const [mensaje, setMensaje] = useState('');
   const send_registrar = import.meta.env.VITE_registrar_send;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:5000/registrar_usuario`, {
+      const response = await axios.post(send_registrar, {
         idEmpleado:id,
-        nombreCompleto: usuario,
+        nombre: usuario,
         password:contrasena,
         admin: admin,
       });
 
       setMensaje(response.data.message || '✅ Usuario registrado correctamente');
+      setTimeout(() => setMensaje(''),4000);
       setId('');
       setUsuario('');
       setContrasena('');
@@ -28,6 +30,7 @@ export const AgregarUsuario = () => {
     } catch (error) {
       console.error(error);
       setMensaje('❌ Ocurrió un error al registrar el usuario.');
+      setTimeout(() => setMensaje(''),4000);
     }
   };
 

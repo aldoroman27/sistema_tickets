@@ -6,33 +6,44 @@ export const ViewTicket = () => {
   const [idUsuario, setIdUsuario] = useState('');
   const [tickets, setTickets] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const send_mistickets = import.meta.env.VITE_mistickets_send;
   //Vamos a cargar al usuario para poder trabajar con su información
   useEffect(() => {
-    const usuarioGuardado = localStorage.getItem('usuario');//Obtenemos al usuario
-    const send_mistickets = import.meta.env.VITE_mistickets_send;
-    if (usuarioGuardado) {//En caso de que se guardara correctamente ejecutamos el siguiente bloque de instrucciones
-      try {
-        const usuario = JSON.parse(usuarioGuardado);//Guardamos el usuario
-        const id = usuario.id;//Obtenemos entonces el id del usuario para poder trabajar con ella.
-        setIdUsuario(id);//Seteamos entonces la información de nuestro usuario usando entonces el setter.
-        console.log('Contenido de localstorage:', localStorage.getItem('usuario'));
-        // Obtenemos los tickets de nuestro backend usando el id de nuestro usuario
+    const usuarioGuardado = localStorage.getItem('usuario');
+  console.log('LocalStorage:', usuarioGuardado);
+
+  if (usuarioGuardado) {
+    try {
+      const usuario = JSON.parse(usuarioGuardado);
+      const id = usuario.id || usuario.idEmpleado;
+      setIdUsuario(id);
+      console.log('ID extraído:', id);
+
+      if (id) {
+        console.log('Haciendo petición a:', `${send_mistickets}/${id}`);
         axios.get(`${send_mistickets}/${id}`)
           .then((response) => {
-            setTickets(response.data);//Almacenamos la información de nuestra petición.
+            console.log('Tickets recibidos:', response.data);
+            setTickets(response.data);
             setCargando(false);
           })
-          //En caso de caer en erorr, entonces
           .catch((error) => {
-            console.error('Error al obtener los tickets:', error);//Mostramos en consola que tuvimos error
+            console.error('Error al obtener los tickets:', error);
             setCargando(false);
           });
-
-      } catch (e) {
-        console.error('Usuario en localStorage no es válido:', e);
+      } else {
+        console.warn('ID del usuario es undefined/null');
         setCargando(false);
       }
+
+    } catch (e) {
+      console.error('Usuario inválido en localStorage:', e);
+      setCargando(false);
     }
+  } else {
+    console.warn('No hay usuario guardado');
+    setCargando(false);
+  }
   }, []);
 
   return (
@@ -58,7 +69,7 @@ export const ViewTicket = () => {
           </thead>
           <tbody>
             {tickets.map(ticket => (
-              <tr key={ticket.idTicket}>
+              <tr key={ticket.mongoID}>
                 <td>{ticket.idTicket}</td>
                 <td>{ticket.nombreCompleto}</td>
                 <td>{ticket.departamento}</td>
