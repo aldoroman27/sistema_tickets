@@ -16,7 +16,7 @@ CORS(app, supports_credentials=True, resources={r"/*": {"origins": [
     "http://localhost:5173",
     "http://localhost:5000",
     "https://backend-sistematickets.onrender.com",
-    "https://<tu-frontend-en-producción>.web.app"  # reemplaza esto si ya lo tienes
+    "https://sistema-tickets-ii8q-lf96httjf-aldoroman27s-projects.vercel.app"  # reemplaza esto si ya lo tienes
 ]}})
 
 
