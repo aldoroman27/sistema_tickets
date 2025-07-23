@@ -15,7 +15,7 @@ export const Tickets = () => {
     equipo: '',
     descripcion: '',
     fecha: '',
-    status: 'Pendiente'
+    estado: 'Pendiente'
   });
   //Mensaje de registro éxitoso de nuestro ticket
   const [mensajeExito, setMensajeExito] = useState('');
@@ -46,7 +46,7 @@ export const Tickets = () => {
     );
       console.log(response.data);
       console.log('Ticket generado',ticketData);
-      setIdGenerado(response.data.idTicket); // Si tu backend regresa el ID, puedes mostrarlo aquí
+      setIdGenerado(response.data.idTicket); 
       setMensajeExito('✅ Ticket enviado correctamente');
       setIdGenerado(response.data.idTicket);
       setTicketData(prev => ({

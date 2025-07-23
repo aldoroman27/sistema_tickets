@@ -16,7 +16,7 @@ CORS(app, supports_credentials=True, resources={r"/*": {"origins": [
     "http://localhost:5173",
     "http://localhost:5000",
     "https://backend-sistematickets.onrender.com",
-    "https://sistema-tickets-ii8q-lf96httjf-aldoroman27s-projects.vercel.app"  # reemplaza esto si ya lo tienes
+    "https://sistema-tickets-ii8q.vercel.app"
 ]}})
 
 
@@ -36,7 +36,6 @@ def handle_options():
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers','Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
 #Todas nuestras funciones que tenemos disponibles dentro de nuestro backend de cada componente.

@@ -9,8 +9,6 @@ import os
 
 bcrypt = Bcrypt()
 auth_bp = Blueprint('auth',__name__)
-CORS(auth_bp)
-
 
 SECRET_KEY = 'mido_clave123#'
 

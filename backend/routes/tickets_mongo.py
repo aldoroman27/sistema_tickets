@@ -74,10 +74,10 @@ def crear_ticket():
         }), 201
     #En caso que durante el proceso se presente un error entonces
     except ValidationError as err:
-        print("ERROR DE VALIDACIÓN EN TICKET")
+        print("ERROR DE VALIDACIÓN EN TICKET", err.messages)
         return jsonify({'message':err.messages}),400
     except Exception as e:
-        print("⚠️ Error al insertar ticket:", e)#Imprimimos en consola el error
+        print("⚠️ Error al insertar ticket:", str(e))#Imprimimos en consola el error
         return jsonify({'error': str(e)}), 500 #Mostramos el error en formato JSON
 
 #Esta ruta solo mostrará los tickets pendientes.
@@ -102,7 +102,7 @@ def obtener_tickets():
         print(f"Total de tickets encontrados: {len(tickets)}")#Mostramos todos los tickets que tenemos en nuestra lista
         return jsonify(tickets),200 #Retornamos los valores con éxito si es que encontramos tickets existentes
     except Exception as e:#En caso de fallar entonces:
-        print("Erro al obtner los tickets: ",e)#Mostramos error al obtener los tickets e imprimimos el error
+        print("Erro al obtener los tickets: ",e)#Mostramos error al obtener los tickets e imprimimos el error
         return jsonify({'message':str(e)})#Mostramos el error
     
 #Esta ruta será la encarga de buscar los tickets, tomando como parametro el ID del ticket.
