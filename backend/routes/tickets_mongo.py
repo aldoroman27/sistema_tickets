@@ -60,7 +60,8 @@ def get_next_ticket_id():
 @tickets_mongo_bp.route('/tickets_agregar', methods=['POST'])
 def crear_ticket():
     try:
-        data = request.json #Recopilamos la información que necesitaremos en formato JSON 
+        data = request.json #Recopilamos la información que necesitaremos en formato JSON
+        print(data)
         ticket_validado = ticket_schema.load(data)
 
         nuevo_id = get_next_ticket_id()

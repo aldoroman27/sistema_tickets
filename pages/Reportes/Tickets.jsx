@@ -7,8 +7,6 @@ export const Tickets = () => {
   const registrar_send = import.meta.env.VITE_registrarTicket_send;
   //Datos del ticket que estamos enviando, se mostrará en consola si es que se están enviando correctamente
   const [ticketData, setTicketData] = useState({
-    idTicket: '',
-    //idEmpleado: '',
     nombreCompleto: '',
     correoElectronico: '',
     departamento: '',
@@ -34,9 +32,18 @@ export const Tickets = () => {
     try {
       const usuario = JSON.parse(localStorage.getItem('usuario'));
       const token = usuario?.token;
+      const idEmpleado = usuario?.idEmpleado || usuario?.id;
+
+      const ticketPayload = {
+        ...ticketData,
+        idEmpleado
+      };
+
+      console.log("El payload que se enviará al final: ", ticketPayload)
+
       const response = await axios.post(
         registrar_send, 
-        ticketData,
+        ticketPayload,
       {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -44,7 +51,7 @@ export const Tickets = () => {
         }
       }
     );
-      console.log(response.data);
+      console.log("Respuesta del backend",response.data);
       console.log('Ticket generado',ticketData);
       setIdGenerado(response.data.idTicket); 
       setMensajeExito('✅ Ticket enviado correctamente');
