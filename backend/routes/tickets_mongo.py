@@ -4,7 +4,7 @@ from flask_cors import CORS #CORS para facilitar las peticiones del front con el
 from pymongo import MongoClient# pymongo para la conexión con la base de datos en mongo
 from marshmallow import ValidationError #Importamos ValidationError para mostrar excepciones.
 import re #No recuerdo que hacía re
-from datetime import datetime #Importamos datetime para obtener la fecha actual.
+from datetime import datetime, date #Importamos datetime para obtener la fecha actual.
 import os #Importamos os para poder obtener las claves de nuestro .env
 #Importamos nuestro schema para validar los tickets
 from schemas.validarticketSchema import TicketSchema
@@ -19,28 +19,6 @@ tickets_mongo_bp = Blueprint('tickets_mongo',__name__)
 client = MongoClient(os.getenv("MONGO_URI"))#Llamamos nuestra key para la conn
 db = client['pruebas_mido']#Seleccionamos el nombre de la db
 coleccion_tickets = db['tickets']#Seleccionamos el nombre de la colección con la que vamos a trabajar
-
-#Definimos una función para validar campos
-def validar_tickets(data):
-    errores = [] #Creamos una lista para los posibles errores que se presenten durante la ejecución
-
-    #Declaramos otra lista de los campos que son requeridos para poder llenar el ticket
-    campos_requeridos = [
-        'idEmpleado', 'nombreCompleto', 'correoElectronico',
-        'departamento', 'equipo', 'descripcion', 'fecha'
-    ]
-    #Hacemos un recorrido dentro de los campos recorridos, si algo es faltante entonces lo mandamos a la lista de errores con el nombre del campo faltante
-    for campo in campos_requeridos:
-        if not data.get(campo):
-            errores.append(f"Campo '{campo}' es obligatorio.")
-    #En caso de que no se presente un correo con información, con @ o con .com, .mx, etc, se presentará entonces el mensaje de correo invalido
-    if data.get('correoElectronico') and not re.match(r"[^@]+@[^@]+\.[^@]+",data['correoElectronico']):
-        errores.append("Correo electronico ínvalido, asegurese que contenga @ y dominio (.com, .mx, etc).")
-    #En caso que la longitud de la descripción sea menor a 5 entonces presentamos error
-    if len(data.get('descripcion', '')) < 5:
-        errores.append("La descripción debe de contener mínimo 5 caracteres.")
-    #Finalmente retornamos la lista de los errores que se presentaron durante la ejecución.
-    return errores
 
 #Declaramos una función para poder obtener el id de cada ticket registrado
 def get_next_ticket_id():
@@ -62,7 +40,12 @@ def crear_ticket():
     try:
         data = request.json #Recopilamos la información que necesitaremos en formato JSON
         print(data)
+
         ticket_validado = ticket_schema.load(data)
+        print("Ticket validado: ", ticket_validado)
+
+        if isinstance(ticket_validado['fecha'], date):
+            ticket_validado['fecha'] = datetime.combine(ticket_validado['fecha'], datetime.min.time())
 
         nuevo_id = get_next_ticket_id()
         ticket_validado ['idTicket'] = nuevo_id
@@ -86,7 +69,9 @@ def crear_ticket():
 def obtener_tickets():
     try:
         #Hacemos una consulta y además un filtrado por estado para mostrar únicamente los que tienen estado pendiente
-        tickets_cursor = coleccion_tickets.find({"estado":"pendiente"})
+        tickets_cursor = coleccion_tickets.find({
+            "estado": {"$regex": "^pendiente$", "$options": "i"}  # i = ignore case
+        })
         tickets = []#Creamos una lista de tickets para almacenarlos y al final retornarlos en formato JSON
 
         #Hacemos un ciclo for para recorrer cada dato que nos retorne nuestro cursor
@@ -103,7 +88,7 @@ def obtener_tickets():
         print(f"Total de tickets encontrados: {len(tickets)}")#Mostramos todos los tickets que tenemos en nuestra lista
         return jsonify(tickets),200 #Retornamos los valores con éxito si es que encontramos tickets existentes
     except Exception as e:#En caso de fallar entonces:
-        print("Erro al obtener los tickets: ",e)#Mostramos error al obtener los tickets e imprimimos el error
+        print("Error al obtener los tickets: ",e)#Mostramos error al obtener los tickets e imprimimos el error
         return jsonify({'message':str(e)})#Mostramos el error
     
 #Esta ruta será la encarga de buscar los tickets, tomando como parametro el ID del ticket.
@@ -158,7 +143,9 @@ def eliminarTicket(id_ticket):
 def ticketsCompletados():
     try:
         #Hacemos una consulta y además un filtrado por estado para mostrar únicamente los que tienen estado completado
-        tickets_cursor = coleccion_tickets.find({"estado":"completado"})
+        tickets_cursor = coleccion_tickets.find({
+            "estado": {"$regex": "^completado$", "$options": "i"}  # i = ignore case
+        })
         tickets = []#Creamos una lista de tickets para almacenarlos y al final retornarlos en formato JSON
 
         #Hacemos un ciclo for para recorrer cada dato que nos retorne nuestro cursor

@@ -29,7 +29,7 @@ export const LiberarTicket = () => {
       const ticket = response.data;
 
       //Si el estado del ticket es pendiente entonces lo almacenamos en nuestra varibale.
-      if (ticket.estado === 'pendiente') {
+      if (ticket.estado.toLowerCase() === 'pendiente') {
         setTicketEncontrado(ticket);
         setMensaje('');
       //En caso contrario mostraremos que el ticket ya está completado.

@@ -26,7 +26,7 @@ export const ConsultarTicket = () => {
           }
         });
         //Filtramos si el ticket está en pendiente
-        const pendientes = response.data.filter(ticket => ticket.estado === 'pendiente');
+        const pendientes = response.data.filter(ticket => ticket.estado.toLoweCase()=== 'pendiente');
         //Seteamos el ticket y lo pasamos como parametro
         setTickets(pendientes);
       } catch (error) {
