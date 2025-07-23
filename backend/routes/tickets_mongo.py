@@ -1,17 +1,19 @@
 #Importamos las librerias necesarias
-from flask import Blueprint, request, jsonify
-from flask_cors import CORS
-from pymongo import MongoClient
-import re
-from datetime import datetime
-import os
-#Importamos de nuestro archivo login_mongo nuestra key a la db
+from flask import Blueprint, request, jsonify #Flask para los endpoints y peticiones
+from flask_cors import CORS #CORS para facilitar las peticiones del front con el backend
+from pymongo import MongoClient# pymongo para la conexión con la base de datos en mongo
+from marshmallow import ValidationError #Importamos ValidationError para mostrar excepciones.
+import re #No recuerdo que hacía re
+from datetime import datetime #Importamos datetime para obtener la fecha actual.
+import os #Importamos os para poder obtener las claves de nuestro .env
+#Importamos nuestro schema para validar los tickets
+from schemas.validarticketSchema import TicketSchema
 
+#Creamos una instancia de nuestra clase TicketSchema.
+ticket_schema = TicketSchema()
 
 #Declaramos nuestro blueprint
 tickets_mongo_bp = Blueprint('tickets_mongo',__name__)
-#Asignamos el nombre a nuestro blueprint
-CORS(tickets_mongo_bp)
 
 #Hacemos la conexión a la base de datos ubicada en mongo
 client = MongoClient(os.getenv("MONGO_URI"))#Llamamos nuestra key para la conn
@@ -59,35 +61,21 @@ def get_next_ticket_id():
 def crear_ticket():
     try:
         data = request.json #Recopilamos la información que necesitaremos en formato JSON 
-        errores = validar_tickets(data) #Validemos que dentro de esa información se cumplan todos los requisitos para levantar un reporte
+        ticket_validado = ticket_schema.load(data)
 
-        if errores:#Si se encuentran errores entonces
-            return jsonify({'errores': errores}), 400 #Retornamos error y mostramos los errores que ocurrieron
-
-        # Generar ID autoincremental para el ticket
         nuevo_id = get_next_ticket_id()
+        ticket_validado ['idTicket'] = nuevo_id
 
-        # Creamos el documento para MongoDB
-        nuevo_ticket = {
-            "idTicket": nuevo_id,
-            "idEmpleado": data['idEmpleado'],
-            "nombreCompleto": data['nombreCompleto'],
-            "correoElectronico": data['correoElectronico'],
-            "departamento": data['departamento'],
-            "equipo": data['equipo'],
-            "descripcion": data['descripcion'],
-            "fecha": data['fecha'],  # string tipo "YYYY-MM-DD"
-            "estado": data.get('estado', 'pendiente')
-        }
-
-        coleccion_tickets.insert_one(nuevo_ticket)#Dentro de nuestra colección (tabla) insertamos nuestro nuevo ticket
-
+        coleccion_tickets.insert_one(ticket_validado)
         #Finalmente retornamos en json un mensaje de éxito
         return jsonify({
             'message': '✅ Ticket insertado correctamente', #Mensaje de éxito
             'idTicket': nuevo_id #Asignamos el nuevo id a nuestro ticket ID
         }), 201
     #En caso que durante el proceso se presente un error entonces
+    except ValidationError as err:
+        print("ERROR DE VALIDACIÓN EN TICKET")
+        return jsonify({'message':err.messages}),400
     except Exception as e:
         print("⚠️ Error al insertar ticket:", e)#Imprimimos en consola el error
         return jsonify({'error': str(e)}), 500 #Mostramos el error en formato JSON

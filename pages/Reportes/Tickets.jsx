@@ -39,7 +39,8 @@ export const Tickets = () => {
         ticketData,
       {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
       }
     );
