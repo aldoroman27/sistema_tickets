@@ -1,6 +1,5 @@
 #Importamos las librerias necesarias
 from flask import Blueprint, request, jsonify #Flask para los endpoints y peticiones
-from flask_cors import CORS #CORS para facilitar las peticiones del front con el backend
 from pymongo import MongoClient# pymongo para la conexión con la base de datos en mongo
 from marshmallow import ValidationError #Importamos ValidationError para mostrar excepciones.
 import re #No recuerdo que hacía re

@@ -9,6 +9,7 @@ from routes.registro import registro_bp
 from routes.tickets_mongo import tickets_mongo_bp
 from routes.login_mongo import auth_bp
 from routes.registro_mongo import registromongo_bp
+from routes.consultarUsuarios import consultrar_usuarios_bp
 
 app = Flask(__name__)
 #Definimos las rutas a las que se va a comunicar nuestro backend, podemos incluir la local para pruebas locales y producción.
@@ -44,6 +45,7 @@ app.register_blueprint(auth_bp)
 #app.register_blueprint(registro_bp) #QUITAR ESTE DESPUES DEL TEST
 app.register_blueprint(tickets_mongo_bp)
 app.register_blueprint(registromongo_bp)
+app.register_blueprint(consultrar_usuarios_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { NavBar } from './components/navbar.jsx';//Importamos nuestro componenete de NavBar que estará presente durante todo el proyecto
 import { Login } from '../pages/Login/Login.jsx';//Importamos nuestras demás páginas
 import { Tickets } from '../pages/Reportes/Tickets.jsx';//Importamos nuestra página de Tickets
-import { CheckTickets } from '../pages/TicketsCheck/Check.jsx';//Importamos la ruta de checkTickets (menú de los admins)
+import { CheckTickets } from '../pages/PanelAdmin/Check.jsx';//Importamos la ruta de checkTickets (menú de los admins)
 import { BuscarTicket } from '../pages/AdminPages/BuscarTicket.jsx';//Importamos la ruta de buscarTickets
 import { LiberarTicket } from '../pages/AdminPages/LiberarTicket.jsx';//Importamos la ruta de liberarTickets (marcar como completados)
 import { ConsultarTicket } from '../pages/AdminPages/ConsultarTicket.jsx';//Importamos la ruta de ConsultarTickets
@@ -17,6 +17,7 @@ import { Todos } from '../pages/AdminPages/Todos.jsx';//Importamos la ruta del b
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';//Importamos nuestro componente protected rute para gestionar la parte de los usuarios
 import { ViewTicket } from '../pages/ViewTicket/ViewTicket.jsx';//Importamos nuestro componente para poder ver los tickets de usuario.
 import { AgregarUsuario } from '../pages/AgregarUsuario/AgregarUsuario.jsx';//Importamos nuestra ruta para poder agregar usuarios
+import { UsuariosRegistrados } from '../pages/AdminPages/UsuariosRegistrados.jsx';//Importamos nuestra ruta para poder mostrar los usuarios
 
 function App() {
   const [usuario, setUsuario] = useState(() => {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/EliminarTicket" element={<ProtectedRoute onlyAdmin={true}><EliminarTicket /></ProtectedRoute>} />{/*Admin*/}
         <Route path="/ModificarTicket" element={<ProtectedRoute onlyAdmin={true}><ModificarTicket /></ProtectedRoute>} />{/*Admin*/}
         <Route path="/Resueltos" element={<ProtectedRoute onlyAdmin={true}><Resueltos /></ProtectedRoute>} />{/*Admin*/}
+        <Route path="/UsuariosRegistrados" element={<ProtectedRoute onlyAdmin={true}><UsuariosRegistrados/></ProtectedRoute>}/>
         <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />{/*User*/}
         <Route path="/GuiaUso" element={<ProtectedRoute><GuiaUso /></ProtectedRoute>} />{/*User*/}
         <Route path="/Todo" element={<ProtectedRoute onlyAdmin={true}><Todos /></ProtectedRoute>} />{/*Admin*/}

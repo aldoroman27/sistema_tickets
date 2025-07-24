@@ -55,6 +55,9 @@ import { useEffect, useState } from 'react';
         <button className='btn btn-AgregarUsuario' onClick={() => navigate('/AgregarUsuario')}>
           Agregar Usuario
         </button>
+        <button className='btn btn-UsuariosRegistrados' onClick={() => navigate('/UsuariosRegistrados')}>
+          Usuarios Registrados
+        </button>
       </div>
     </div>
   );
