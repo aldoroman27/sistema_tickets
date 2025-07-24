@@ -16,9 +16,6 @@ export const NavBar = () => {
                 <img src="/mido.png"/>
             </div>
             <div className="links" title="Iniciar Sesión">
-                <Link to="/Login">
-                    <User size={32}/>
-                </Link>
                 <Link to='/Home' title="Panel de Usuario">
                     <House size={32}/>
                 </Link>

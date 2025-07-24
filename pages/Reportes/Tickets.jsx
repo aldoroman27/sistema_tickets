@@ -189,7 +189,7 @@ export const Tickets = () => {
             readOnly
           />
 
-          <button type="submit">Enviar Ticket</button>
+          <button className='btn-enviar' type="submit">Enviar Ticket</button>
         </form>
         {errores.length > 0 && (
         <div className="errores">

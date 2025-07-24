@@ -6,45 +6,55 @@
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.05);
   font-family: 'Segoe UI', sans-serif;
+  overflow-x: auto; /* ✅ Scroll horizontal en caso de tablas grandes */
 }
 
-
+/* Título centrado */
 .consultar-container h2 {
   text-align: center;
   color: #2f3542;
   margin-bottom: 20px;
 }
 
+/* Tabla principal */
 .tabla-tickets {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  table-layout: fixed;      /* ✅ Celdas de ancho fijo */
+  word-wrap: break-word;    /* ✅ Salto de línea en contenido largo */
 }
 
+/* Encabezados */
 .tabla-tickets thead {
-  background-color: #f1f2f6;
+  background-color: #3498db;
+  color: #fffefe;
 }
 
-.tabla-tickets th, .tabla-tickets td {
+/* Celdas */
+.tabla-tickets th,
+.tabla-tickets td {
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  white-space: normal;        /* ✅ Permite saltos de línea */
+  overflow-wrap: break-word;  /* ✅ Forzar quiebres en palabras largas */
 }
 
-.tabla-tickets tr:hover {
-  background-color: #f8f9fa;
-}
-
+/* Última columna (por ejemplo: rol admin) */
 .tabla-tickets td:last-child {
   text-transform: capitalize;
   font-weight: 500;
   color: #e67e22;
 }
+
+/* Primera columna (por ejemplo: nombre o ID) */
 .tabla-tickets td:first-child {
   font-weight: bold;
   color: #2d3436;
 }
 
+/* Botón de reportes */
 .btn-reportes {
   margin-top: 20px;
   padding: 10px 20px;
@@ -58,7 +68,29 @@
   transition: background-color 0.3s ease;
 }
 
+/* Hover en botón */
 .btn-reportes:hover {
   background-color: #27ae60;
+}
+
+/* ✅ Responsive: ajustes en pantallas pequeñas */
+@media screen and (max-width: 600px) {
+  .tabla-tickets {
+    font-size: 12px;
+  }
+
+  .tabla-tickets th,
+  .tabla-tickets td {
+    padding: 8px;
+  }
+
+  .consultar-container {
+    padding: 10px;
+  }
+
+  .btn-reportes {
+    width: 100%;
+    font-size: 14px;
+  }
 }
 

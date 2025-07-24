@@ -6,41 +6,71 @@
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.05);
   font-family: 'Segoe UI', sans-serif;
+  overflow-x: auto; /* ✅ Permite scroll horizontal en móviles si es necesario */
 }
 
-
+/* Título centrado bonito */
 .completados-container h2 {
   text-align: center;
   color: #2f3542;
   margin-bottom: 20px;
 }
 
-.tabla-tickets-completados{
+/* Tabla */
+.tabla-tickets-completados {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  table-layout: fixed; /* ✅ Forzamos que no se rompa el layout */
+  word-wrap: break-word; /* ✅ Hace que las palabras largas hagan salto */
 }
 
+/* Encabezados */
 .tabla-tickets-completados thead {
-  background-color: #f1f2f6;
+  background-color: #3498db;
+  color: #fffefe;
 }
 
-.tabla-tickets-completados th, .tabla-tickets-completados td {
+/* Celdas */
+.tabla-tickets-completados th,
+.tabla-tickets-completados td {
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  white-space: normal;      /* ✅ Permite que el contenido se acomode */
+  overflow-wrap: break-word;/* ✅ Salto de línea forzado en textos largos */
 }
 
+/* Hover para resaltar fila */
 .tabla-tickets-completados tr:hover {
   background-color: #f8f9fa;
 }
 
+/* Última columna - color verde para estado */
 .tabla-tickets-completados td:last-child {
   text-transform: capitalize;
   font-weight: 500;
   color: #00fc22;
 }
+
+/* Primera columna - resaltar ID o nombre */
 .tabla-tickets-completados td:first-child {
   font-weight: bold;
   color: #2d3436;
+}
+
+/* ✅ Responsive: ajusta fuente y scroll en pantallas pequeñas */
+@media screen and (max-width: 600px) {
+  .tabla-tickets-completados {
+    font-size: 12px;
+  }
+
+  .tabla-tickets-completados th,
+  .tabla-tickets-completados td {
+    padding: 8px;
+  }
+
+  .completados-container {
+    padding: 10px;
+  }
 }

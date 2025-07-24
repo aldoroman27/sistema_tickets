@@ -46,10 +46,10 @@ export const UsuariosRegistrados = () => {
               key={index}
               className={usuario.admin ? 'fila-admin' : 'fila-normal'}
             >
-              <td>{usuario.idEmpleado}</td>
-              <td>{usuario.nombre}</td>
-              <td>{usuario.password_hash}</td>
-              <td>{usuario.admin ? 'Administrador' : 'Usuario'}</td>
+              <td data-label="ID Empleado">{usuario.idEmpleado}</td>
+              <td data-label="Nombre">{usuario.nombre}</td>
+              <td data-label="Contraseña (Hash)">{usuario.password_hash}</td>
+              <td data-label="Tipo">{usuario.admin ? 'Administrador' : 'Usuario'}</td>
             </tr>
           ))}
         </tbody>

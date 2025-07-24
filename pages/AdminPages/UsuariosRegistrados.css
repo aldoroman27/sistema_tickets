@@ -2,6 +2,7 @@
   padding: 20px;
   max-width: 900px;
   margin: 0 auto;
+  overflow-x: auto;
 }
 
 .tabla-usuarios {
@@ -18,14 +19,51 @@
 }
 
 .tabla-usuarios thead {
-  background-color: #3f5596;
-  color: #fdfafa;
+  background-color: #3498db;
+  color: #fffefe;
 }
 
 .fila-admin {
-  background-color: #d4f9d4; /* verde claro */
+  background-color: #d4f9d4;
 }
 
 .fila-normal {
-  background-color: #f9d4d4; /* rojo claro */
+  background-color: #f9d4d4;
 }
+
+/* 🎯 MEDIA QUERY para pantallas chicas */
+@media screen and (max-width: 600px) {
+  .tabla-usuarios thead {
+    display: none; /* Ocultamos la cabecera */
+  }
+
+  .tabla-usuarios, .tabla-usuarios tbody, .tabla-usuarios tr, .tabla-usuarios td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabla-usuarios tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .tabla-usuarios td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .tabla-usuarios td::before {
+    content: attr(data-label); /* Muestra el nombre del campo */
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+

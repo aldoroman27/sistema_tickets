@@ -6,41 +6,66 @@
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.05);
   font-family: 'Segoe UI', sans-serif;
+  overflow-x: auto; /*  Scroll horizontal si es necesario */
 }
 
-
+/* Título */
 .allTickets-container h2 {
   text-align: center;
   color: #2f3542;
   margin-bottom: 20px;
 }
 
-.tabla-allTickets{
+/* Tabla */
+.tabla-allTickets {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  table-layout: fixed;         /* ✅ Distribuye equitativamente */
+  word-wrap: break-word;       /* ✅ Rompe palabras largas */
 }
 
+/* Encabezado */
 .tabla-allTickets thead {
-  background-color: #f1f2f6;
+  background-color: #3498db;
+  color: #fffefe;
 }
 
-.tabla-allTickets th, .tabla-allTickets td {
+/* Celdas */
+.tabla-allTickets th,
+.tabla-allTickets td {
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  white-space: normal;         /* ✅ Permite saltos */
+  overflow-wrap: break-word;   /* ✅ Soporta contenido largo */
 }
 
-.tabla-allTickets tr:hover {
-  background-color: #f8f9fa;
-}
-
+/* Última celda (opcional, como status o acción) */
 .tabla-allTickets td:last-child {
   text-transform: capitalize;
   font-weight: 500;
   color: #000000;
 }
+
+/* Primera celda (por ejemplo, ID o nombre) */
 .tabla-allTickets td:first-child {
   font-weight: bold;
   color: #2d3436;
+}
+
+/* ✅ Responsivo para celulares */
+@media screen and (max-width: 600px) {
+  .tabla-allTickets {
+    font-size: 12px;
+  }
+
+  .tabla-allTickets th,
+  .tabla-allTickets td {
+    padding: 8px;
+  }
+
+  .allTickets-container {
+    padding: 10px;
+  }
 }
