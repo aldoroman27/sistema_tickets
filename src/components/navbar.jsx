@@ -1,7 +1,6 @@
 /*En esta parte estamos importando de la librería react-roter Link para los links de nuestras distintas páginas*/
 import { Link} from "react-router-dom";
-/*En este apartado estmoas importando los íconos de cada una de nuestras páginas*/
-import { User } from 'phosphor-react';
+/*En este apartado estamos importando los íconos de cada una de nuestras páginas*/
 import { CheckCircle } from 'phosphor-react';
 import { House } from 'phosphor-react';
 /*Importamos el diseño de nuestra barra de navegación*/
