@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 # sistema_tickets
-Un proyecto de portafolio para desarrollar un sistema de tickets sencillo para una empresa.
+Un proyecto de portafolio para desarrollar un sistema de tickets sencillo, SIN MOTIVOS DE LUCRO y además OPEN SOURCE.
 =======
 # React + Vite
 
