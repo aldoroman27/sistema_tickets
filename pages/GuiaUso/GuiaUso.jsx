@@ -4,8 +4,8 @@ import './GuiaUso.css';
 export const GuiaUso = () => {
   const handleDescargar = () => {
     const link = document.createElement('a');
-    link.href = '/Guia_de_uso_definitiva.pdf'; //El pdf se encuentra en la carpeta PUBLIC
-    link.download = 'Guia_de_uso.pdf';//Se descargará con este nombre
+    link.href = '/Guia_de_uso_DEMO.pdf'; //El pdf se encuentra en la carpeta PUBLIC
+    link.download = 'Guia_de_uso_STbyAGRDM.pdf';//Se descargará con este nombre
     link.click();
   };
 
