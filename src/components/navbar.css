@@ -12,9 +12,17 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
+  .Logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
   .Logo h1{
-    color: white;
-    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
   }
 
   .links {

@@ -73,7 +73,6 @@ export const Login = () => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        <img src="/mido.png"/>
         <h2 className="login-title">Panel de Inicio de Sesión</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <input

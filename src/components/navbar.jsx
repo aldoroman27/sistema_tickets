@@ -12,8 +12,8 @@ export const NavBar = () => {
     if (!usuario) return null;
     return (
         <div className="navbar">
-            <div className="Logo" title="MIDO GROUP">
-                <img src="/mido.png"/>
+            <div className="Logo" title="gestion">
+                <img src="/gestion.png"/>
             </div>
             <div className="links" title="Iniciar Sesión">
                 <Link to='/Home' title="Panel de Usuario">
