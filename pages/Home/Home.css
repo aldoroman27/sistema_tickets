@@ -44,6 +44,11 @@ h2 {
   color: white;
 }
 
+.crearIncidencia {
+  background-color: aquamarine;
+  color: white;
+}
+
 .cerrarSesion {
   background-color: #e74c3c;
   color: white;

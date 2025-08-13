@@ -40,6 +40,10 @@ export const Home = () => {
     navigate('/ViewTicket')
   };
 
+  const handleCrearIncidencia = () => {
+    navigate('/Incidencia')
+  }
+
   return (
     <div className='home-container'>
       <h1>Bienvenido al sistema de tickets {nombreUsuario && `, ${nombreUsuario} ¿Cómo podemos ayudarte?`}</h1>
@@ -57,6 +61,9 @@ export const Home = () => {
         </button>
         <button className='btn cerrarSesion' onClick={handleCerrarSesion}>
           Cerrar Sesión
+        </button>
+        <button className='btn crearIncidencia' onClick={handleCrearIncidencia}>
+          Crear incidencia
         </button>
       </div>
     </div>

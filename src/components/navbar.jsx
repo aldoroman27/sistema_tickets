@@ -3,6 +3,7 @@ import { Link} from "react-router-dom";
 /*En este apartado estamos importando los íconos de cada una de nuestras páginas*/
 import { CheckCircle } from 'phosphor-react';
 import { House } from 'phosphor-react';
+import { Briefcase } from 'phosphor-react';
 /*Importamos el diseño de nuestra barra de navegación*/
 import "./navbar.css";
 
@@ -17,6 +18,9 @@ export const NavBar = () => {
             <div className="links" title="Iniciar Sesión">
                 <Link to='/Home' title="Panel de Usuario">
                     <House size={32}/>
+                </Link>
+                <Link to="/Incidencia" title="Incidencia">
+                    <Briefcase size={32}/>
                 </Link>
 
                 {/* Mostrar solo si el usuario es admin */}

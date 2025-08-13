@@ -38,10 +38,8 @@ def get_next_ticket_id():
 def crear_ticket():
     try:
         data = request.json #Recopilamos la información que necesitaremos en formato JSON
-        print(data)
 
         ticket_validado = ticket_schema.load(data)
-        print("Ticket validado: ", ticket_validado)
 
         if isinstance(ticket_validado['fecha'], date):
             ticket_validado['fecha'] = datetime.combine(ticket_validado['fecha'], datetime.min.time())

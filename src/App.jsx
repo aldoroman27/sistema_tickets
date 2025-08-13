@@ -18,6 +18,8 @@ import { ProtectedRoute } from './components/ProtectedRoute.jsx';//Importamos nu
 import { ViewTicket } from '../pages/ViewTicket/ViewTicket.jsx';//Importamos nuestro componente para poder ver los tickets de usuario.
 import { AgregarUsuario } from '../pages/AgregarUsuario/AgregarUsuario.jsx';//Importamos nuestra ruta para poder agregar usuarios
 import { UsuariosRegistrados } from '../pages/AdminPages/UsuariosRegistrados.jsx';//Importamos nuestra ruta para poder mostrar los usuarios
+import { Incidencia } from '../pages/Incidencia/Incidencia.jsx';
+import { ViewIncidencias } from '../pages/ViewIncidencias/ViewIncidencias.jsx';
 
 function App() {
   const [usuario, setUsuario] = useState(() => {
@@ -56,6 +58,8 @@ function App() {
         <Route path="/Todo" element={<ProtectedRoute onlyAdmin={true}><Todos /></ProtectedRoute>} />{/*Admin*/}
         <Route path="/ViewTicket" element={<ProtectedRoute><ViewTicket /></ProtectedRoute>}/>{/*User*/}
         <Route path="/AgregarUsuario" element={<ProtectedRoute><AgregarUsuario/></ProtectedRoute>}/>
+        <Route path='/Incidencia' element={<Incidencia/>}/>
+        <Route path='/ViewIncidencias' element={<ViewIncidencias/>}/>
       </Routes>
     </div>
   );
