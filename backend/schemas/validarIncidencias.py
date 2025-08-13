@@ -5,7 +5,6 @@ class validarIncidenciaSchema(Schema):
     idEmpleado = fields.String(required=True)
     nombreCompleto = fields.String(required=True)
     puesto = fields.String(required=True)
-    correoElectronico = fields.Email(required=False)
     departamento = fields.String(required=True)
     justificacion = fields.String(required=True)
     fecha = fields.Date(required=True)

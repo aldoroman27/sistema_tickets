@@ -5,12 +5,11 @@ import './Incidencia.css'
 export const Incidencia = () => {
   const [showInstrucciones, setShowInstrucciones] = useState(false);
   const [showEspecificaciones, setShowEspecificaciones] = useState(false);
-  const registrarIncidencia_send = 'https://localhost:5000/registrarIncidencia'
+  const registrarIncidencia_send = 'http://localhost:5000/registrarIncidencia'
   const [incidenciaData, setIncidenciaData] = useState({
     idEmpleado: '',
     nombreCompleto: '',
-    puesto: '', 
-    correoElectronico: '', 
+    puesto: '',  
     departamento:'',
     justificacion: '',
     fecha: '',
@@ -22,7 +21,7 @@ export const Incidencia = () => {
   const[errores, setErrores] = useState([]);
 
   const handleSubmit =  async (e) => {
-    e.preventDefautl();
+    e.preventDefault();
     setErrores([]);
     setMensajeExito('');
     try {
@@ -50,8 +49,7 @@ export const Incidencia = () => {
       setIncidenciaData(prev => ({
         idEmpleado: prev.idEmpleado,
         nombreCompleto: '',
-        puesto: '', 
-        correoElectronico: '', 
+        puesto: '',  
         departamento:'',
         justificacion: '',
         fecha: '',
@@ -60,9 +58,9 @@ export const Incidencia = () => {
       }));
       setTimeout(() => {
         setMensajeExito('');
-      },4000);
+      },8000);
     }catch(error){
-      if(error.response && error.response.status == 400) {
+      if(error.response && error.response.status === 400) {
         const data = error.response.data;
       if (Array.isArray(data.errores)){
         setErrores(data.errores);
@@ -93,6 +91,12 @@ export const Incidencia = () => {
   return (
     <div className="incidencia-container">
     <h1 className="titulo-incidencia">Registrar incidencia</h1>
+
+    {mensajeExito && (
+      <div className="mensaje-exito">
+        {mensajeExito}
+      </div>
+    )}
 
     {/* Acordeón - Instrucciones */}
       <div className="acordeon">
@@ -230,6 +234,15 @@ export const Incidencia = () => {
 
         <button type="submit" className="btn-enviar">Enviar incidencia</button>
       </form>
+      {errores.length > 0 && (
+        <div className="errores">
+          <ul>
+            {errores.map((error, idx) => (
+              <li key={idx} className="error-item">ERROR: {error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   </div>
   )
