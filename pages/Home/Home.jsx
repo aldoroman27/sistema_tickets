@@ -47,7 +47,7 @@ export const Home = () => {
   return (
     <div className='home-container'>
       <h1>Bienvenido al sistema de tickets {nombreUsuario && `, ${nombreUsuario} ¿Cómo podemos ayudarte?`}</h1>
-      <h2>Seleccione una acción a realizar</h2>
+      <h2>Seleccione una opción a realizar</h2>
 
       <div className='buttons-container'>
         <button className='btn generarTicket' onClick={handleGenerarTicket}>
