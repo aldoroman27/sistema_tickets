@@ -1,6 +1,6 @@
 .admin-container {
   max-width: 700px;
-  margin: 50px auto;
+  margin: 90px auto;
   padding: 40px 30px;
   background-color: #ffffff;
   border-radius: 18px;
@@ -10,6 +10,13 @@
 }
 
 .titulo-admin {
+  /* Estilos para alinear el ícono y el título */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  
+  /* Tus estilos */
   font-size: 30px;
   margin-bottom: 30px;
   color: #2c3e50;
@@ -25,36 +32,88 @@
   margin-top: 20px;
 }
 
+/* --- NUEVA ARQUITECTURA DE BOTONES --- */
+
+/* 1. Estilos base para TODOS los botones */
 .btn {
+  /* Flexbox para alinear ícono y texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* Estilos de 'outline' */
+  background-color: transparent; /* Fondo transparente */
+  border: 2px solid; /* Borde sólido, el color lo pone la clase */
+  
+  /* Tus estilos */
   padding: 18px 24px;
   font-size: 17px;
   font-weight: 600;
-  border: none;
   border-radius: 12px;
   cursor: pointer;
-  color: white;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: all 0.2s ease; /* Transición para todo */
   white-space: normal;
   line-height: 1.4;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
+
+/* 2. Grupos de color (Acciones estándar) */
+.btn-admin,
+.btn-modificar,
+.btn-buscar,
+.btn-mostrarTodos,
+.btn-UsuariosRegistrados {
+  color: #2c3e50; /* Color de texto y borde */
+  border-color: #2c3e50;
+}
+
+/* 3. Grupos de color (Acciones positivas) */
+.btn-liberar,
+.btn-resueltos,
+.btn-AgregarUsuario {
+  color: #27ae60;
+  border-color: #27ae60;
+}
+
+/* 4. Grupos de color (Acciones destructivas) */
+.btn-eliminar,
+.btn-cerrarSesion {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+
+/* --- ESTADOS HOVER (Aquí vuelve el color) --- */
 
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px); /* Levanta el botón */
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  color: white; /* El texto siempre será blanco en hover */
 }
 
-/* Colores específicos para cada botón */
-.btn-admin     { background-color: #1c6da2; }
-.btn-liberar       { background-color: #27ae60; }
-.btn-eliminar      { background-color: #c0392b; }
-.btn-modificar     { background-color: #8e44ad; }
-.btn-buscar        { background-color: #e67e22; }
-.btn-resueltos     { background-color: #16a085; }
-.btn-mostrarTodos  { background-color: #42279b; }
-.btn-cerrarSesion { background-color: #e16f63; }
-.btn-AgregarUsuario { background-color: #466da7; }
-.btn-UsuariosRegistrados {background-color: #3f64b5;}
+/* Hover para acciones estándar */
+.btn-admin:hover,
+.btn-modificar:hover,
+.btn-buscar:hover,
+.btn-mostrarTodos:hover,
+.btn-UsuariosRegistrados:hover {
+  background-color: #2c3e50;
+}
+
+/* Hover para acciones positivas */
+.btn-liberar:hover,
+.btn-resueltos:hover,
+.btn-AgregarUsuario:hover {
+  background-color: #27ae60;
+}
+
+/* Hover para acciones destructivas */
+.btn-eliminar:hover,
+.btn-cerrarSesion:hover {
+  background-color: #c0392b;
+  border-color: #c0392b; /* Aseguramos el borde por si acaso */
+}
+
 
 /* Responsive: 1 columna en pantallas pequeñas */
 @media (max-width: 600px) {

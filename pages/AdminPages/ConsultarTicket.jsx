@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import './ConsultarTicket.css';
+import { KeyReturn } from 'phosphor-react';
 
 export const ConsultarTicket = () => {
+  const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
   //Declaramos nuestra variable para obtener la liga para la petición
   const consultar_send = import.meta.env.VITE_consultar_send;
@@ -83,7 +86,10 @@ export const ConsultarTicket = () => {
             </tbody>
           </table>
           <button className="btn-reportes" onClick={exportarExcel}>
-            📥 Generar Reporte Excel
+             Generar Reporte Excel
+          </button>
+          <button className="btn-regresar-tickets-pendientes" onClick={() => navigate('/CheckTickets')}>
+             <KeyReturn size={32}/> Regresar
           </button>
         </>
       )}
