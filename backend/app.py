@@ -6,11 +6,13 @@ from routes.tickets import ticket_bp #Estas rutas solo hay que usarlas cuando es
 from routes.registro import registro_bp
 """
 #Rutas de acceso para nuestra db en nube MongoDB w Atlas, implementar también en axios para el buen funcionamiento.
-from routes.tickets_mongo import tickets_mongo_bp
-from routes.login_mongo import auth_bp
-from routes.registro_mongo import registromongo_bp
-from routes.consultarUsuarios import consultrar_usuarios_bp
-
+from routes.ticket.tickets_mongo import tickets_mongo_bp
+from routes.logIn.login_mongo import auth_bp
+from routes.users.registro_mongo import registromongo_bp
+from routes.users.consultarUsuarios import consultrar_usuarios_bp
+from routes.users.buscarUsuario import buscarUsuarios_bp
+from routes.users.eliminarUsuarios import eliminarUsuarios_bp
+from routes.users.modificarUsuarios import modificarUsuarios_bp
 app = Flask(__name__)
 #Definimos las rutas a las que se va a comunicar nuestro backend, podemos incluir la local para pruebas locales y producción.
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": [
@@ -46,6 +48,9 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(tickets_mongo_bp)
 app.register_blueprint(registromongo_bp)
 app.register_blueprint(consultrar_usuarios_bp)
+app.register_blueprint(buscarUsuarios_bp)
+app.register_blueprint(eliminarUsuarios_bp)
+app.register_blueprint(modificarUsuarios_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

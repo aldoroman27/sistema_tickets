@@ -12,7 +12,9 @@ import {
   ListDashes, // ícono para mostrar todos los tickets
   SignOut, // ícono para cerrar sesión
   UserPlus, // ícono para agregar usuario
-  Users // ícono para ver todos los usuarios
+  Users, // ícono para ver todos los usuarios
+  IdentificationCard,
+  UserCircleMinus
 } from 'phosphor-react';
 
   export const CheckTickets = () => {
@@ -72,6 +74,12 @@ import {
         </button>
         <button className='btn btn-UsuariosRegistrados' onClick={() => navigate('/UsuariosRegistrados')}>
           <Users size={32}/>Usuarios Registrados
+        </button>
+        <button className='btn btn-ModificarUsuarios' onClick={() => navigate('/ModificarUsuarios')}>
+          <IdentificationCard size={32}/> Modificar Usuarios
+        </button>
+        <button className='btn btn-EliminarUsuarios' onClick={() => navigate('/EliminarUsuarios')}>
+          <UserCircleMinus size={32}/> Eliminar Usuarios
         </button>
       </div>
     </div>

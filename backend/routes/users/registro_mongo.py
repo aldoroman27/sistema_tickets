@@ -1,7 +1,6 @@
 from flask import request, jsonify, Blueprint
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
-from routes.login_mongo import MONGO_URI
 import os
 
 bcrypt = Bcrypt()
@@ -60,3 +59,4 @@ def registrarUsuario():#Definimos nuestra función
     except Exception as e:
         print(f"ERROR EN EL SERVIDOR: {str(e)}")#Imprimimos en consola que tenemos error en el servidor y la respuesta que este arroja
         return jsonify({'message':str(e)}),500#Retornamos entonces el mensaje de error y además el código de error.
+

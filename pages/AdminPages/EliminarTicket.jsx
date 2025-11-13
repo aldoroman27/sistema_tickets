@@ -13,12 +13,12 @@ export const EliminarTicket = () => {
   const handleBuscar = async () => {
     //En caso de no ingresar nada, entonces mostramos un mensaje de advertencia
     if (!idBuscar.trim()) {
-      setMensaje('⚠️ Ingresa un ID para buscar.');
+      setMensaje(' Ingresa un ID para buscar.');
       return;
     }
     //También, que solamente debe de incluir carácteres númericos y no letras
     if (!/^\d+$/.test(idBuscar)) {
-      setMensaje('⚠️ El ID debe ser un número.');
+      setMensaje(' El ID debe ser un número.');
       return;
     }
     //Intentamos hacer la petición a nuestro servidor.
