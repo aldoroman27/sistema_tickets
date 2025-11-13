@@ -51,8 +51,6 @@ export const Tickets = () => {
         }
       }
     );
-      console.log("Respuesta del backend",response.data);
-      console.log('Ticket generado',ticketData);
       setIdGenerado(response.data.idTicket); 
       setMensajeExito('✅ Ticket enviado correctamente');
       setIdGenerado(response.data.idTicket);

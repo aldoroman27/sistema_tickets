@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { House, PlusCircle, Book, SignOut, Ticket} from 'phosphor-react'
 import './Home.css';
 
 //Definimos nuestro componente Home
@@ -46,21 +47,23 @@ export const Home = () => {
 
   return (
     <div className='home-container'>
-      <h1>Bienvenido al sistema de tickets {nombreUsuario && `, ${nombreUsuario} ¿Cómo podemos ayudarte?`}</h1>
-      <h2>Seleccione una opción a realizar</h2>
+      <h1>
+        <House size={32}/> Bienvenido al sistema de tickets {nombreUsuario && `, ${nombreUsuario} ¿Cómo podemos ayudarte?`}
+      </h1>
+      <h2>Seleccione una acción a realizar:</h2>
 
       <div className='buttons-container'>
         <button className='btn generarTicket' onClick={handleGenerarTicket}>
-          Generar un Ticket
+          <PlusCircle size={32}/> Generar un Ticket
         </button>
         <button className='btn estadoTicket' onClick={handleConsultarticket}>
-            Mis tickets
+          <Ticket size={32}/>  Mis tickets
         </button>
         <button className='btn guiadeUso' onClick={handleGuiaUso}>
-          Guía de Uso
+          <Book size={32}/>Guía de Uso
         </button>
         <button className='btn cerrarSesion' onClick={handleCerrarSesion}>
-          Cerrar Sesión
+          <SignOut size={32}/>Cerrar Sesión
         </button>
         <button className='btn crearIncidencia' onClick={handleCrearIncidencia}>
           Crear incidencia

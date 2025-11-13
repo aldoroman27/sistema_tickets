@@ -1,9 +1,13 @@
 import './BuscarTicket.css';
+import { useNavigate } from 'react-router-dom';
+import { MagnifyingGlass } from 'phosphor-react'
+import { KeyReturn } from 'phosphor-react';
 import { useState } from 'react';
 import axios from 'axios';
 
 export const BuscarTicket = () => {
   const [idBuscar, setIdBuscar] = useState('');
+  const navigate = useNavigate();
   const [ticket, setTicket] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const buscar_send = import.meta.env.VITE_buscar_send;
@@ -41,11 +45,15 @@ export const BuscarTicket = () => {
           value={idBuscar}
           onChange={(e) => setIdBuscar(e.target.value)}
         />
-        <button onClick={handleBuscar}>Buscar</button>{/*Invocamos al handler de nuestro botón Buscar que mandará el ID del ticket que estemos buscando*/}
+        <button className='btn-buscar-ticket' onClick={handleBuscar}>
+         <MagnifyingGlass size={32}/> Buscar {/*Invocamos al handler de nuestro botón Buscar que mandará el ID del ticket que estemos buscando*/}
+        </button>
       </div>
 
       {mensaje && <p className="mensaje">{mensaje}</p>}
-
+      <button className="btn-regresar-tickets-buscar" onClick={() => navigate('/CheckTickets')}>
+             <KeyReturn size={32}/> Regresar
+      </button>
       {ticket && (
         <div className="ticket-info">
           <p><strong>ID Ticket:</strong> {ticket.idTicket}</p> {/*Mostramos el ID del ticket*/}

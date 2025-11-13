@@ -1,6 +1,21 @@
 import './Check.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import {
+  UserGear, //Para nuestro título de bienvenida
+  ListChecks, // ícono para consultar tickets
+  CheckCircle, // ícono para liberar tickets
+  Trash, // ícono para eliminar tickets
+  PencilSimple, // ícono para modificar tickets
+  MagnifyingGlass, // ícono para buscar tickets
+  Archive, // ícono para tickets resueltos
+  ListDashes, // ícono para mostrar todos los tickets
+  SignOut, // ícono para cerrar sesión
+  UserPlus, // ícono para agregar usuario
+  Users, // ícono para ver todos los usuarios
+  IdentificationCard,
+  UserCircleMinus
+} from 'phosphor-react';
 
   export const CheckTickets = () => {
   const navigate = useNavigate();
@@ -26,37 +41,45 @@ import { useEffect, useState } from 'react';
   
   return (
     <div className='admin-container'>
-      <h2 className="titulo-admin">Panel de Administrador{nombreUsuario && ` - Bienvenido, ${nombreUsuario}`}</h2>
+      <h2 className="titulo-admin">
+        <UserGear size={32} />Panel de Administrador{nombreUsuario && ` - Bienvenido, ${nombreUsuario}`}
+      </h2>
       <div className="botones-admin">
         <button className="btn btn-admin" onClick={() => navigate('/ConsultarTicket')}>
-          Consultar tickets pendientes
+          <ListChecks size={32}/> Consultar tickets pendientes
         </button>
         <button className="btn btn-liberar" onClick={() => navigate('/LiberarTicket')}>
-           Marcar tickets como completados
+           <CheckCircle size={32}/> Marcar tickets como completados
         </button>
         <button className="btn btn-eliminar" onClick={() => navigate('/EliminarTicket')}>
-          Eliminar tickets
+          <Trash size={32}/>Eliminar tickets
         </button>
         <button className="btn btn-modificar" onClick={() => navigate('/ModificarTicket')}>
-          Modificar ticket
+          <PencilSimple size={32}/>Modificar ticket
         </button>
         <button className="btn btn-buscar" onClick={() => navigate('/BuscarTicket')}>
-          Buscar Ticket
+          <MagnifyingGlass size={32}/>Buscar Ticket
         </button>
         <button className="btn btn-resueltos" onClick={() => navigate('/Resueltos')}>
-          Tickets Resueltos
+          <Archive size={32}/>Tickets Resueltos
         </button>
         <button className="btn btn-mostrarTodos" onClick={() => navigate('/Todo')}>
-          Mostrar todos los tickets
+          <ListDashes size={32}/>Mostrar todos los tickets
         </button>
         <button className='btn btn-cerrarSesion' onClick={handlerlogOut}>
-          Cerrar Sesión
+          <SignOut size={32}/>Cerrar Sesión
         </button>
         <button className='btn btn-AgregarUsuario' onClick={() => navigate('/AgregarUsuario')}>
-          Agregar Usuario
+          <UserPlus size={32}/>Agregar Usuario
         </button>
         <button className='btn btn-UsuariosRegistrados' onClick={() => navigate('/UsuariosRegistrados')}>
-          Usuarios Registrados
+          <Users size={32}/>Usuarios Registrados
+        </button>
+        <button className='btn btn-ModificarUsuarios' onClick={() => navigate('/ModificarUsuarios')}>
+          <IdentificationCard size={32}/> Modificar Usuarios
+        </button>
+        <button className='btn btn-EliminarUsuarios' onClick={() => navigate('/EliminarUsuarios')}>
+          <UserCircleMinus size={32}/> Eliminar Usuarios
         </button>
         <button className='btn btn-incidencias' onClick={() => navigate('/ViewIncidencias')}>
           Incidencias

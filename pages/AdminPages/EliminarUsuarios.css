@@ -1,0 +1,145 @@
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.eliminarUsuario-container {
+  max-width: 650px;
+  margin: 50px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e1e5eb;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  font-family: "Inter", "Segoe UI", sans-serif;
+  transition: 0.3s ease;
+}
+
+.eliminarUsuario-container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #2f3542;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+
+/* ===== BUSCADOR ===== */
+.buscador-eliminar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.buscador-eliminar input {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid #cdd4df;
+  border-radius: 10px;
+  background: #f8f9fb;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.buscador-eliminar input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #4b7bec;
+  box-shadow: 0 0 6px rgba(75, 123, 236, 0.4);
+}
+
+.buscador-eliminar button {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.buscador-eliminar button:hover {
+  background: linear-gradient(135deg, #3867d6, #2748a0);
+  transform: translateY(-2px);
+}
+
+
+/* ===== MENSAJES ===== */
+.mensaje {
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  background-color: #fff5d1;
+  color: #a07400;
+  border: 1px solid #ffe19c;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+
+/* ===== CARD DE INFORMACIÓN DEL USUARIO ===== */
+.user-info {
+  background: #fafbfc;
+  border: 1px solid #e3e7ee;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  animation: fadeIn 0.3s ease;
+}
+
+.user-info p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #3b3b3b;
+  font-weight: 500;
+}
+
+.user-info strong {
+  font-weight: 700;
+  color: #2f3542;
+}
+
+
+/* ===== ADVERTENCIA ROJA ===== */
+.delete-info {
+  display: block;
+  margin-top: 15px;
+  padding: 12px;
+  text-align: center;
+  background: #c0392b;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+
+/* ===== BOTÓN ELIMINAR ===== */
+.btn-eliminar {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e84118, #c23616);
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(220,20,60,0.2);
+}
+
+.btn-eliminar:hover {
+  background: linear-gradient(135deg, #c23616, #992d14);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(220,20,60,0.25);
+}
+
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

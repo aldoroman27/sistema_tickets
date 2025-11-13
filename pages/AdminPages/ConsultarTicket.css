@@ -6,7 +6,7 @@
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.05);
   font-family: 'Segoe UI', sans-serif;
-  overflow-x: auto; /* ✅ Scroll horizontal en caso de tablas grandes */
+  overflow-x: auto; 
 }
 
 /* Título centrado */
@@ -21,8 +21,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
-  table-layout: fixed;      /* ✅ Celdas de ancho fijo */
-  word-wrap: break-word;    /* ✅ Salto de línea en contenido largo */
+  table-layout: fixed;      
+  word-wrap: break-word;    
 }
 
 /* Encabezados */
@@ -37,8 +37,8 @@
   padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  white-space: normal;        /* ✅ Permite saltos de línea */
-  overflow-wrap: break-word;  /* ✅ Forzar quiebres en palabras largas */
+  white-space: normal;      
+  overflow-wrap: break-word;  
 }
 
 /* Última columna (por ejemplo: rol admin) */
@@ -68,10 +68,34 @@
   transition: background-color 0.3s ease;
 }
 
+
+/* Botón de regresar */
+.btn-regresar-tickets-pendientes {
+  display: flex;
+  align-items: center ;
+  justify-content: left;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 8px 8px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #cc2e2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 /* Hover en botón */
 .btn-reportes:hover {
   background-color: #27ae60;
 }
+
+.btn-regresar-tickets-pendientes:hover{
+  background-color:  #ae2727;
+}
+
 
 /* ✅ Responsive: ajustes en pantallas pequeñas */
 @media screen and (max-width: 600px) {
