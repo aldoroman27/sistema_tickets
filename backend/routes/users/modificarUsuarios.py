@@ -3,38 +3,55 @@ from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 import os
 
-#Creamos una nueva instancia de Bcrypt en caso de que quieran modificar la contraseña del usuario
 bcrypt = Bcrypt()
 
-#Definimos el Blueprint de nuestro endpoint
 modificarUsuarios_bp = Blueprint('modificarUsuarios_bp', __name__)
 
-#Definimos los parametros de la conexión con la db
 client = MongoClient(os.getenv('MONGO_URI'))
 db = client['pruebas_mido']
 coleccion_usuarios = db['usuarios']
 
-@modificarUsuarios_bp.route('/modificarUsuarios/<idUsuario>', methods=['PUT', 'OPTIONS'])
+
+@modificarUsuarios_bp.route('/modificarUsuarios/<idUsuario>', methods=['PUT'])
 def modificarUsuarios(idUsuario):
     try:
-        #Recibimos los datos del usuario que se desean modificar
-        datos = request.json()
-        #Creamos un diccionario que va a recibir los campos que se actualizarán
+        datos = request.get_json()
+
+        if not datos:
+            return jsonify({'message': 'No se enviaron datos.'}), 400
+
         camposToupdate = {}
 
-        for campo in ["nombreCompleto", "idEmpleado", "password"]:
-            if campo in datos:
-                camposToupdate[campo] = datos[campo]
+        # Actualizar nombre
+        if 'nombre' in datos and datos['nombre']:
+            camposToupdate['nombre'] = datos['nombre']
+
+        # Actualizar ID del empleado
+        if 'idEmpleado' in datos and datos['idEmpleado']:
+            camposToupdate['idEmpleado'] = datos['idEmpleado']
+
+        # Actualizar permisos
+        if 'permisos' in datos:
+            camposToupdate['admin'] = datos['permisos']
+
+        # Actualizar contraseña SOLO si se envió
+        if 'password' in datos and datos['password']:
+            hashed_password = bcrypt.generate_password_hash(datos['password']).decode('utf-8')
+            camposToupdate['password_hash'] = hashed_password
+
         if not camposToupdate:
-            return jsonify({'message':'No se proporcinaron campos para actualizar'})
+            return jsonify({'message': 'No se proporcionaron campos válidos para actualizar.'}), 400
+
         resultado = coleccion_usuarios.update_one(
-            {'idEmpleado':idUsuario},
+            {'idEmpleado': idUsuario},
             {'$set': camposToupdate}
         )
 
         if resultado.matched_count == 0:
-            return jsonify({'message':f'No se encontró ningún usuario con el ID: {idUsuario}'}),400
-        else:
-            return jsonify({'message':f'Se modificó correctamente el usuario con ID: {idUsuario}'}),200
+            return jsonify({'message': f'No se encontró ningún usuario con el ID: {idUsuario}'}), 404
+
+        return jsonify({'message': f'Usuario con ID {idUsuario} modificado correctamente.'}), 200
+
     except Exception as e:
-        return jsonify({'message':'Error durante el proceso de conexión con el servidor...'}),500
+        print("Error:", e)
+        return jsonify({'message': 'Error interno del servidor.'}), 500

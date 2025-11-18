@@ -18,14 +18,8 @@ import { ProtectedRoute } from './components/ProtectedRoute.jsx';//Importamos nu
 import { ViewTicket } from '../pages/ViewTicket/ViewTicket.jsx';//Importamos nuestro componente para poder ver los tickets de usuario.
 import { AgregarUsuario } from '../pages/AgregarUsuario/AgregarUsuario.jsx';//Importamos nuestra ruta para poder agregar usuarios
 import { UsuariosRegistrados } from '../pages/AdminPages/UsuariosRegistrados.jsx';//Importamos nuestra ruta para poder mostrar los usuarios
-<<<<<<< HEAD
-import { Incidencia } from '../pages/Incidencia/Incidencia.jsx';
-import { ViewIncidencias } from '../pages/ViewIncidencias/ViewIncidencias.jsx';
-
-=======
 import {  ModificarUsuarios  } from '../pages/AdminPages/ModificarUsuarios.jsx';
 import {  EliminarUsuarios  } from '../pages/AdminPages/EliminarUsuarios.jsx';
->>>>>>> effb32cda23a8a410109120d76210183bbcac4ce
 function App() {
   const [usuario, setUsuario] = useState(() => {
      return JSON.parse(localStorage.getItem('usuario'));
@@ -65,8 +59,6 @@ function App() {
         <Route path="/EliminarUsuarios" element={<ProtectedRoute onlyAdmin={true}><EliminarUsuarios /></ProtectedRoute>} />{/*Admin*/}
         <Route path="/ViewTicket" element={<ProtectedRoute><ViewTicket /></ProtectedRoute>}/>{/*User*/}
         <Route path="/AgregarUsuario" element={<ProtectedRoute><AgregarUsuario/></ProtectedRoute>}/>
-        <Route path='/Incidencia' element={<Incidencia/>}/>
-        <Route path='/ViewIncidencias' element={<ViewIncidencias/>}/>
       </Routes>
     </div>
   );

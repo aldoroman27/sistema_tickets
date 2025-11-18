@@ -62,6 +62,7 @@
 .btn-modificar,
 .btn-buscar,
 .btn-mostrarTodos,
+.btn-ModificarUsuarios,
 .btn-UsuariosRegistrados {
   color: #2c3e50; /* Color de texto y borde */
   border-color: #2c3e50;
@@ -100,6 +101,11 @@
   background-color: #2c3e50;
 }
 
+.btn-ModificarUsuarios:hover,
+.btn-incidencias:hover{
+  background-color: #2c3e50;
+}
+
 /* Hover para acciones positivas */
 .btn-liberar:hover,
 .btn-resueltos:hover,
@@ -109,7 +115,8 @@
 
 /* Hover para acciones destructivas */
 .btn-eliminar:hover,
-.btn-cerrarSesion:hover {
+.btn-cerrarSesion:hover,
+.btn-EliminarUsuarios:hover {
   background-color: #c0392b;
   border-color: #c0392b; /* Aseguramos el borde por si acaso */
 }

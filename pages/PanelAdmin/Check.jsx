@@ -66,9 +66,6 @@ import {
         <button className="btn btn-mostrarTodos" onClick={() => navigate('/Todo')}>
           <ListDashes size={32}/>Mostrar todos los tickets
         </button>
-        <button className='btn btn-cerrarSesion' onClick={handlerlogOut}>
-          <SignOut size={32}/>Cerrar Sesión
-        </button>
         <button className='btn btn-AgregarUsuario' onClick={() => navigate('/AgregarUsuario')}>
           <UserPlus size={32}/>Agregar Usuario
         </button>
@@ -81,8 +78,8 @@ import {
         <button className='btn btn-EliminarUsuarios' onClick={() => navigate('/EliminarUsuarios')}>
           <UserCircleMinus size={32}/> Eliminar Usuarios
         </button>
-        <button className='btn btn-incidencias' onClick={() => navigate('/ViewIncidencias')}>
-          Incidencias
+        <button className='btn btn-cerrarSesion' onClick={handlerlogOut}>
+          <SignOut size={32}/>Cerrar Sesión
         </button>
       </div>
     </div>

@@ -32,7 +32,7 @@ export const EliminarUsuarios = () => {
 
     const handleEliminar = async () => {
         try{
-            const url = `${eliminar_send}/${usuarioEncontrado.idUsuario}`;
+            const url = `http://127.0.0.1:5000/eliminarUsuarios/${usuarioEncontrado.idUsuario}`;
             const response = await axios.delete(url);
             setMensaje('Usuario eliminado correctamente!');
             setUsuarioEncontrado(null);

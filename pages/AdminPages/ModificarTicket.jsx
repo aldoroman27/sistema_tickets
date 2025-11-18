@@ -14,7 +14,7 @@ export const ModificarTicket = () => {
   const handleBuscar = async () => {
     //Si es que no es un valor númerico entonces mostramos error
     if (!/^\d+$/.test(idBuscar)) {
-      setMensaje('⚠️ Ingresa un ID numérico válido');//Deberá de ingresar un dato que sea númerico
+      setMensaje('Ingresa un ID numérico válido');//Deberá de ingresar un dato que sea númerico
       return;//Retornamos
     }
     //En caso de que sea un valor correcto pasamos al bloque de try y catch
@@ -28,9 +28,9 @@ export const ModificarTicket = () => {
       console.error(error);//Mostramos el error dentro de la consola
       setTicket(null);//No seteamos nada nuestro seter de tickets
       if (error.response && error.response.status === 404) {//Si hubo error por algunas de las dos condicionales entonces mostramos el mensaje
-        setMensaje('❌ Ticket no encontrado.');//Mostramos entonces el mensaje de error
+        setMensaje('Ticket no encontrado.');//Mostramos entonces el mensaje de error
       } else {
-        setMensaje('❌ Error al buscar el ticket.');//Mostramos error si la falla fue dentro del servidor.
+        setMensaje('Error al buscar el ticket.');//Mostramos error si la falla fue dentro del servidor.
       }
     }
   };
@@ -52,7 +52,7 @@ export const ModificarTicket = () => {
       //Esperamos una respuesta de nuestro servidor con PUT y mandando los datosModificados junto con la petición.
       await axios.put(`${modificar_send}/${ticket.idTicket}`, datosModificados);
       //En caso de tener éxito le mostramos al usuario que tuvimos éxito realizando la operación.
-      setMensaje('✅ Cambios guardados correctamente.');
+      setMensaje(' Cambios guardados correctamente.');
       console.log('Cambios guardados correctamente');
       //Limpiamos nuestro setter de nuestro ticket.
       setTicket(null);
@@ -60,7 +60,7 @@ export const ModificarTicket = () => {
       setIdBuscar('');
     } catch (error) {//En caso de fallar entonces hacemos un catch del error.
       console.error(error);//Mostramos el error ocurrido dentro de nuestra consola.
-      setMensaje('❌ Error al guardar los cambios.');//Mostramos el error en nuestro setter.
+      setMensaje('Error al guardar los cambios.');//Mostramos el error en nuestro setter.
     }
   };
 
@@ -112,8 +112,9 @@ export const ModificarTicket = () => {
             <option value="Mouse">Mouse</option>
             <option value="Teclado">Teclado</option>
             <option value="Audífonos">Audífonos</option>
-            <option value="Licencias">Licencias</option>
+            <option value="Software">Software</option>
             <option value="Red">Red</option>
+            <option value="Monitor">Monitor</option>
             <option value="Otro">Otro</option>
           </select>
 

@@ -50,7 +50,7 @@ def crear_ticket():
         coleccion_tickets.insert_one(ticket_validado)
         #Finalmente retornamos en json un mensaje de éxito
         return jsonify({
-            'message': '✅ Ticket insertado correctamente', #Mensaje de éxito
+            'message': 'Ticket insertado correctamente', #Mensaje de éxito
             'idTicket': nuevo_id #Asignamos el nuevo id a nuestro ticket ID
         }), 201
     #En caso que durante el proceso se presente un error entonces
@@ -58,7 +58,7 @@ def crear_ticket():
         print("ERROR DE VALIDACIÓN EN TICKET", err.messages)
         return jsonify({'message':err.messages}),400
     except Exception as e:
-        print("⚠️ Error al insertar ticket:", str(e))#Imprimimos en consola el error
+        print("Error al insertar ticket:", str(e))#Imprimimos en consola el error
         return jsonify({'error': str(e)}), 500 #Mostramos el error en formato JSON
 
 #Esta ruta solo mostrará los tickets pendientes.

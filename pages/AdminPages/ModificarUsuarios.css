@@ -1,0 +1,108 @@
+.modificar-usuario-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.modificar-usuario-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.buscador {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.buscador input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.buscador button {
+    padding: 10px 15px;
+    border: none;
+    background: #4a78f7;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buscador button:hover {
+    background: #355fe0;
+}
+
+.mensaje {
+    text-align: center;
+    margin: 10px 0;
+    color: #e63946;
+    font-weight: 600;
+}
+
+.formulario-modificar-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.campo input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.input-error {
+    border-color: #e63946 !important;
+}
+
+.error-text {
+    color: #e63946;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.btn-guardar {
+    padding: 12px;
+    background: #22a96c;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-guardar:hover {
+    background: #1c8f59;
+}
+
+@media (max-width: 480px) {
+    .modificar-usuario-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .buscador {
+        flex-direction: column;
+    }
+}
