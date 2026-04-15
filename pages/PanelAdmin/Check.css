@@ -1,0 +1,135 @@
+.admin-container {
+  max-width: 700px;
+  margin: 90px auto;
+  padding: 40px 30px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.titulo-admin {
+  /* Estilos para alinear el ícono y el título */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  
+  /* Tus estilos */
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-weight: 700;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 12px;
+}
+
+.botones-admin {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* --- NUEVA ARQUITECTURA DE BOTONES --- */
+
+/* 1. Estilos base para TODOS los botones */
+.btn {
+  /* Flexbox para alinear ícono y texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* Estilos de 'outline' */
+  background-color: transparent; /* Fondo transparente */
+  border: 2px solid; /* Borde sólido, el color lo pone la clase */
+  
+  /* Tus estilos */
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease; /* Transición para todo */
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* 2. Grupos de color (Acciones estándar) */
+.btn-admin,
+.btn-modificar,
+.btn-buscar,
+.btn-mostrarTodos,
+.btn-ModificarUsuarios,
+.btn-UsuariosRegistrados {
+  color: #2c3e50; /* Color de texto y borde */
+  border-color: #2c3e50;
+}
+
+/* 3. Grupos de color (Acciones positivas) */
+.btn-liberar,
+.btn-resueltos,
+.btn-AgregarUsuario {
+  color: #27ae60;
+  border-color: #27ae60;
+}
+
+/* 4. Grupos de color (Acciones destructivas) */
+.btn-eliminar,
+.btn-cerrarSesion {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+
+/* --- ESTADOS HOVER (Aquí vuelve el color) --- */
+
+.btn:hover {
+  transform: translateY(-3px); /* Levanta el botón */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  color: white; /* El texto siempre será blanco en hover */
+}
+
+/* Hover para acciones estándar */
+.btn-admin:hover,
+.btn-modificar:hover,
+.btn-buscar:hover,
+.btn-mostrarTodos:hover,
+.btn-UsuariosRegistrados:hover {
+  background-color: #2c3e50;
+}
+
+.btn-ModificarUsuarios:hover,
+.btn-incidencias:hover{
+  background-color: #2c3e50;
+}
+
+/* Hover para acciones positivas */
+.btn-liberar:hover,
+.btn-resueltos:hover,
+.btn-AgregarUsuario:hover {
+  background-color: #27ae60;
+}
+
+/* Hover para acciones destructivas */
+.btn-eliminar:hover,
+.btn-cerrarSesion:hover,
+.btn-EliminarUsuarios:hover {
+  background-color: #c0392b;
+  border-color: #c0392b; /* Aseguramos el borde por si acaso */
+}
+
+
+/* Responsive: 1 columna en pantallas pequeñas */
+@media (max-width: 600px) {
+  .botones-admin {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 16px;
+  }
+}

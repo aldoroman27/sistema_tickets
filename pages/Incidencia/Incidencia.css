@@ -1,0 +1,130 @@
+.incidencia-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.titulo-incidencia {
+  text-align: center;
+  color: #1e3c72;
+  margin-bottom: 20px;
+}
+
+.acordeon {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.acordeon-header {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #f0f4ff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1e3c72;
+}
+
+.acordeon-header:hover {
+  background-color: #e0e8ff;
+}
+
+.acordeon-body {
+  background: white;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.acordeon-body ol {
+  padding-left: 20px;
+}
+
+.acordeon-body ul {
+  padding-left: 35px;
+  list-style: disc;
+  margin-top: 5px;
+}
+
+.nota {
+  background: #ffecec;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #a00;
+  border: 1px solid #f5c2c2;
+  margin-top: 12px;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #1e3c72;
+  outline: none;
+}
+
+.btn-enviar {
+  background: #1e3c72;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn-enviar:hover {
+  background: #2a5298;
+}
+
+.mensaje-exito {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+
+@media (max-width: 600px) {
+  .incidencia-container {
+    padding: 15px;
+  }
+}

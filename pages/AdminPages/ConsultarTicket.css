@@ -1,0 +1,120 @@
+.consultar-container {
+  max-width: 95%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: auto; 
+}
+
+/* Título centrado */
+.consultar-container h2 {
+  text-align: center;
+  color: #2f3542;
+  margin-bottom: 20px;
+}
+
+/* Tabla principal */
+.tabla-tickets {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;      
+  word-wrap: break-word;    
+}
+
+/* Encabezados */
+.tabla-tickets thead {
+  background-color: #3498db;
+  color: #fffefe;
+}
+
+/* Celdas */
+.tabla-tickets th,
+.tabla-tickets td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: normal;      
+  overflow-wrap: break-word;  
+}
+
+/* Última columna (por ejemplo: rol admin) */
+.tabla-tickets td:last-child {
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #e67e22;
+}
+
+/* Primera columna (por ejemplo: nombre o ID) */
+.tabla-tickets td:first-child {
+  font-weight: bold;
+  color: #2d3436;
+}
+
+/* Botón de reportes */
+.btn-reportes {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Botón de regresar */
+.btn-regresar-tickets-pendientes {
+  display: flex;
+  align-items: center ;
+  justify-content: left;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 8px 8px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #cc2e2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover en botón */
+.btn-reportes:hover {
+  background-color: #27ae60;
+}
+
+.btn-regresar-tickets-pendientes:hover{
+  background-color:  #ae2727;
+}
+
+
+/* ✅ Responsive: ajustes en pantallas pequeñas */
+@media screen and (max-width: 600px) {
+  .tabla-tickets {
+    font-size: 12px;
+  }
+
+  .tabla-tickets th,
+  .tabla-tickets td {
+    padding: 8px;
+  }
+
+  .consultar-container {
+    padding: 10px;
+  }
+
+  .btn-reportes {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
