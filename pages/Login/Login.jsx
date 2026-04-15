@@ -9,7 +9,8 @@ export const Login = () => {
   const [mensaje, setMensaje] = useState('');
   const navigate = useNavigate();
   //Importamos entonces nuestra ruta hacia nuestro servidor para manejar las peticiones.
-  const login_send = import.meta.env.VITE_login;
+  const login_send = import.meta.env.VITE_login_send;
+  //const login_send = import.meta.env.VITE_login_local
 
   //Vamos a importar el nuevo url para las peticiones de nuestra aplicación
   const url = `${login_send}`
