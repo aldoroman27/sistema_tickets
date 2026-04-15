@@ -19,6 +19,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": [
     "http://localhost:5173",
     "http://localhost:5000",
+    "http://localhost:5174",
     "https://backend-sistematickets.onrender.com",
     "https://sistema-tickets-ii8q.vercel.app"
 ]}})
